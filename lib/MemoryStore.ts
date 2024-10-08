@@ -7,7 +7,9 @@ class Collection {
 		})
 	}
 
-	public findAll(query: any) {
+	public findAll(query: any = null) {
+		if (!query) return this.data
+
 		return this.data.filter(item => {
 			return Object.keys(query).every(key => item[key] === query[key])
 		})

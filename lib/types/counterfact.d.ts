@@ -1,5 +1,5 @@
 export interface CounterfactRequest {
-	query?: Record<string, string>
+	query?: Record<string, string | string[] | number | boolean>
 	path?: Record<string, string>
 	header?: Record<string, string>
 	body?: any

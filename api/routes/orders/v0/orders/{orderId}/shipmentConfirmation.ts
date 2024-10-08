@@ -1,8 +1,8 @@
 import type { HTTP_POST } from '../../../../../types/paths/orders/v0/orders/{orderId}/shipmentConfirmation.types.js'
 
-export const POST: HTTP_POST = $ =>
-	$.context.RequestHandler.handle(
-		$,
+export const POST: HTTP_POST = _req =>
+	_req.context.RequestHandler.handle(
+		_req,
 		{
 			name: 'confirmShipment',
 			rateLimit: {
@@ -10,10 +10,13 @@ export const POST: HTTP_POST = $ =>
 				burst: 10,
 			},
 			validation: {
-				jsonBody: $.context.definitions.confirmShipmentRequestSchema.strict(),
+				jsonBody: _req.context.definitions.confirmShipmentRequestSchema.strict(),
+				path: "orderId",
 			},
 		},
-		({ response }: typeof $) => {
-			return response[204]
+		(req: typeof _req) => {
+			const responseFactory = new req.context.ResponseFactory(req)
+
+			return responseFactory.make(204)
 		}
 	)
