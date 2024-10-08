@@ -32,6 +32,8 @@ export class ResponseFactory {
 
 		let res = this.request.response[statusCode]
 
+		this.request.responseHeaders['x-amzn-RequestId'] = crypto.randomUUID()
+
 		for (const key in this.request.responseHeaders) {
 			res = res.header(key, this.request.responseHeaders[key])
 		}
