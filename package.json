@@ -2,10 +2,10 @@
   "name": "amazon-api-mock",
   "version": "1.0.0",
   "scripts": {
-    "generate:types": "npx counterfact@latest ./openapi.json api --generate-types",
-    "generate": "npx counterfact@latest ./openapi.json api -g",
-    "build:lib": "tsc && find lib -type f -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' {} \\;",
-    "start": "npx counterfact@latest ./openapi.json api --port 3100"
+    "generate:types": "npx counterfact@latest ./openapi.json api --generate-types && grep -h -v '^import' ./api/types/definitions/*.ts > ./api/types/definitions.merged.ts",
+    "generate:zod": "npx ts-to-zod ./api/types/definitions.merged.ts ./lib/generated/definitions.zod.ts",
+    "build:lib": "tsc ; find lib -type f -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' {} \\;",
+    "start": "npx counterfact@latest ./openapi.json api --port 3100 -s"
   },
   "dependencies": {
     "@types/node": "^22.7.4"

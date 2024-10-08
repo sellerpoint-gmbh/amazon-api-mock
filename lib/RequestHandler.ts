@@ -1,11 +1,16 @@
 // @ts-ignore
 import { RateLimiter } from './RateLimiter.cjs'
+// @ts-ignore
+import { Validator } from './Validator.cjs'
+
 import type { RateLimiterArgs, RateLimiter as RateLimiterType } from './RateLimiter'
-import crypto from 'crypto'
+import type { ValidatorArgs, Validator as ValidatorType } from './Validator'
+import { CounterfactContext } from './types/counterfact'
 
 export interface RequestHandlerArgs {
 	name: string
 	rateLimit?: RateLimiterArgs
+	validation?: ValidatorArgs
 }
 
 export class RequestHandler {
@@ -18,13 +23,21 @@ export class RequestHandler {
 		return (this.rateLimiterMap[name] = new RateLimiter(rateLimit) as RateLimiterType)
 	}
 
-	static handle(ctx, args: RequestHandlerArgs, fn) {
+	static handle(ctx: CounterfactContext, args: RequestHandlerArgs, fn) {
 		const rateLimiter = this.getRateLimiter(args)
 
 		const clientId = '12345'
 
 		if (rateLimiter && !rateLimiter.allow(clientId)) {
 			return ctx.response[429].json()
+		}
+
+		if (args.validation) {
+			const validator = new Validator(args.validation) as ValidatorType
+			const { success, data } = validator.process(ctx)
+			if (!success) {
+				return ctx.response[400].json(data)
+			}
 		}
 
 		return fn(ctx)

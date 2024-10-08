@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "target": "ES2015",
     "outDir": "./lib",
     "rootDir": "./lib",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "lib/*": ["./lib/*"]
+    }
   },
   "include": ["lib/**/*"],
   "exclude": ["node_modules"]
