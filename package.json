@@ -5,9 +5,12 @@
     "generate:types": "npx counterfact@latest ./openapi.json api --generate-types",
     "generate": "npx counterfact@latest ./openapi.json api -g",
     "build:lib": "tsc && find lib -type f -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' {} \\;",
-    "start": "npx counterfact@latest ./schemas/common.json api --port 3100"
+    "start": "npx counterfact@latest ./openapi.json api --port 3100"
   },
   "dependencies": {
     "@types/node": "^22.7.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
   }
 }

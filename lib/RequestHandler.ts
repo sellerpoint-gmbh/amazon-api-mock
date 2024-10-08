@@ -1,3 +1,4 @@
+// @ts-ignore
 import { RateLimiter } from './RateLimiter.cjs'
 import type { RateLimiterArgs, RateLimiter as RateLimiterType } from './RateLimiter'
 import crypto from 'crypto'
@@ -22,7 +23,7 @@ export class RequestHandler {
 
 		const clientId = '12345'
 
-		if (!rateLimiter.allow(clientId)) {
+		if (rateLimiter && !rateLimiter.allow(clientId)) {
 			return ctx.response[429].json()
 		}
 
