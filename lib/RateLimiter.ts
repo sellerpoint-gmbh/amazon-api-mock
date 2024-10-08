@@ -31,9 +31,13 @@ export class RateLimiter {
 
 		if ((this.tokens[clientId] || 0) > 0) {
 			this.tokens[clientId] -= 1
-			return true // Request allowed
+			return true
 		} else {
-			return false // Request throttled
+			return false
 		}
+	}
+
+	public getTokens(clientId: string) {
+		return this.tokens[clientId]
 	}
 }

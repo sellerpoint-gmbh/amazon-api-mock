@@ -4,6 +4,7 @@
   "scripts": {
     "generate:types": "npx counterfact@latest ./openapi.json api --generate-types && grep -h -v '^import' ./api/types/definitions/*.ts > ./api/types/definitions.merged.ts",
     "generate:zod": "npx ts-to-zod ./api/types/definitions.merged.ts ./lib/generated/definitions.zod.ts",
+    "clean": "find lib -type f -name \"*.cjs\" -exec rm {} +; rm -rf ./api/.cache; rm -rf ./node_modules",
     "build:lib": "tsc ; find lib -type f -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' {} \\;",
     "start": "npx counterfact@latest ./openapi.json api --port 3100 -s",
     "docker:build": "docker build -t amazon-api-mock .",

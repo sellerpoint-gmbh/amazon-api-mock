@@ -1,5 +1,5 @@
 import * as z from 'zod'
-import { CounterfactContext } from './types/counterfact'
+import { CounterfactRequest } from './types/counterfact'
 
 export interface ValidatorArgs {
 	jsonBody: z.AnyZodObject
@@ -17,12 +17,12 @@ export class Validator {
 		this.jsonBodyValidator = args.jsonBody
 	}
 
-	public process(ctx: CounterfactContext) {
+	public process(request: CounterfactRequest) {
 		let validationErrors = []
 
 		if (this.jsonBodyValidator) {
-			if (!ctx.body || !this.jsonBodyValidator.safeParse(ctx.body).success) {
-				validationErrors.push(...this.jsonBodyValidator.safeParse(ctx.body).error.issues)
+			if (!request.body || !this.jsonBodyValidator.safeParse(request.body).success) {
+				validationErrors.push(...this.jsonBodyValidator.safeParse(request.body).error.issues)
 			}
 		}
 
@@ -31,7 +31,7 @@ export class Validator {
 				success: false,
 				data: {
 					errors: validationErrors.map(e => ({
-						code: e.code,
+						code: "custom-1",
 						message: JSON.stringify(e),
 					})),
 				},

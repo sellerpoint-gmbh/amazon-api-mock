@@ -2,10 +2,13 @@
 import { RateLimiter } from './RateLimiter.cjs'
 // @ts-ignore
 import { Validator } from './Validator.cjs'
+// @ts-ignore
+import { ResponseFactory } from './ResponseFactory.cjs'
 
 import type { RateLimiterArgs, RateLimiter as RateLimiterType } from './RateLimiter'
 import type { ValidatorArgs, Validator as ValidatorType } from './Validator'
-import { CounterfactContext } from './types/counterfact'
+import type { ResponseFactory as ResponseFactoryType } from './ResponseFactory'
+import { CounterfactRequest } from './types/counterfact'
 
 export interface RequestHandlerArgs {
 	name: string
@@ -23,23 +26,30 @@ export class RequestHandler {
 		return (this.rateLimiterMap[name] = new RateLimiter(rateLimit) as RateLimiterType)
 	}
 
-	static handle(ctx: CounterfactContext, args: RequestHandlerArgs, fn) {
+	static handle(request: CounterfactRequest, args: RequestHandlerArgs, fn) {
+		request.responseHeaders = {}
+
 		const rateLimiter = this.getRateLimiter(args)
+		const responseFactory = new ResponseFactory(request) as ResponseFactoryType
 
 		const clientId = '12345'
 
-		if (rateLimiter && !rateLimiter.allow(clientId)) {
-			return ctx.response[429].json()
+		if (rateLimiter) {
+			if(!rateLimiter.allow(clientId)){
+				return responseFactory.make(429)
+			}
+
+			request.responseHeaders['x-amzn-RateLimit-Limit'] = rateLimiter.getTokens(clientId).toFixed(2)
 		}
 
 		if (args.validation) {
 			const validator = new Validator(args.validation) as ValidatorType
-			const { success, data } = validator.process(ctx)
+			const { success, data } = validator.process(request)
 			if (!success) {
-				return ctx.response[400].json(data)
+				return responseFactory.make(400, data)
 			}
 		}
 
-		return fn(ctx)
+		return fn(request)
 	}
 }

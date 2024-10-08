@@ -1,8 +1,9 @@
 import type { HTTP_GET } from '../../../../types/paths/orders/v0/orders/{orderId}.types.js'
 
-export const GET: HTTP_GET = $ =>
-	$.context.RequestHandler.handle(
-		$,
+
+export const GET: HTTP_GET = _req =>
+	_req.context.RequestHandler.handle(
+		_req,
 		{
 			name: 'getOrder',
 			rateLimit: {
@@ -10,7 +11,15 @@ export const GET: HTTP_GET = $ =>
 				burst: 5,
 			},
 		},
-		({ response }: typeof $) => {
-			return response[200].random()
+		(req: typeof _req) => {
+			const responseFactory = new req.context.ResponseFactory(req)
+
+			const order = req.context.db.orders.findOne({ orderId: req.path.orderId })
+
+			if(!order){
+				return responseFactory.make(404)
+			}
+
+			return responseFactory.make(200, order)
 		}
 	)
