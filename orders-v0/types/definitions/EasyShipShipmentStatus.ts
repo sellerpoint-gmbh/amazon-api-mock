@@ -1,0 +1,17 @@
+export type EasyShipShipmentStatus =
+  | "PendingSchedule"
+  | "PendingPickUp"
+  | "PendingDropOff"
+  | "LabelCanceled"
+  | "PickedUp"
+  | "DroppedOff"
+  | "AtOriginFC"
+  | "AtDestinationFC"
+  | "Delivered"
+  | "RejectedByBuyer"
+  | "Undeliverable"
+  | "ReturningToSeller"
+  | "ReturnedToSeller"
+  | "Lost"
+  | "OutForDelivery"
+  | "Damaged";

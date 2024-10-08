@@ -1,0 +1,3 @@
+**/.cache
+**/*.cjs
+node_modules
