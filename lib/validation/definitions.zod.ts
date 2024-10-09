@@ -58,7 +58,7 @@ export const restrictedResourceSchema = z.object({
     z.literal("DELETE"),
   ]),
   path: z.string(),
-  dataElements: z.array(z.string()).optional(),
+  dataElements: z.array(z.string()),
 });
 
 export const createRestrictedDataTokenResponseSchema = z.object({

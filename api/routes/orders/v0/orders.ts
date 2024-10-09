@@ -1,3 +1,4 @@
+import { GetOrdersResponse } from "../../../types/definitions/GetOrdersResponse.js";
 import type { HTTP_GET } from "../../../types/paths/orders/v0/orders.types.js";
 
 export const GET: HTTP_GET = (_req) =>
@@ -15,9 +16,25 @@ export const GET: HTTP_GET = (_req) =>
     },
     (req: typeof _req) => {
       const responseFactory = new req.context.ResponseFactory(req);
-
       const orders = req.context.db.orders.findAll();
 
-      return responseFactory.make(200, orders);
+      const dataElements = req.context.RestrictedDataTokenHandler.allow(req);
+
+      const restrictedOrders = orders.map((order) => ({
+        ...order,
+        ShippingAddress: dataElements.includes("shippingAddress")
+          ? order.ShippingAddress
+          : undefined,
+        BuyerInfo: dataElements.includes("buyerInfo")
+          ? order.BuyerInfo
+          : undefined,
+        BuyerTaxInformation: dataElements.includes("buyerTaxInformation")
+          ? order.BuyerTaxInformation
+          : undefined,
+      }));
+
+      return responseFactory.make<GetOrdersResponse>(200, {
+        payload: { Orders: restrictedOrders },
+      });
     },
   );

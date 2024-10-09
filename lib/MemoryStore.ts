@@ -1,5 +1,5 @@
 class Collection<T> {
-  private data: any[] = [];
+  constructor(private data: any[]) {}
 
   public findOne(query: Partial<T>): T {
     return this.data.find((item) => {
@@ -49,9 +49,9 @@ class Collection<T> {
 export class MemoryStore {
   private collections: Record<string, Collection<any>> = {};
 
-  public collection<T>(name: string): Collection<T> {
+  public collection<T>(name: string, data: any = []): Collection<T> {
     if (!this.collections[name]) {
-      this.collections[name] = new Collection<T>();
+      this.collections[name] = new Collection<T>(data);
     }
 
     return this.collections[name];

@@ -1,5 +1,6 @@
 import { RequestHandler } from "../../lib/RequestHandler";
 import { ResponseFactory } from "../../lib/ResponseFactory";
+import { RestrictedDataTokenHandler } from "../../lib/RestrictedDataTokenHandler";
 import { MemoryStore } from "../../lib/MemoryStore";
 import * as definitions from "../../lib/validation/definitions.zod";
 import * as custom from "../../lib/validation/custom.zod";
@@ -8,10 +9,13 @@ import { Order } from "../types/definitions/Order";
 import { Destination } from "../types/definitions/Destination";
 import { Subscription } from "../types/definitions/Subscription";
 
+const data = JSON.parse(
+  dep.fs.readFileSync(dep.path.join(process.cwd(), "store.json"), "utf-8"),
+);
 const memoryStore = new MemoryStore();
 
 const db = {
-  orders: memoryStore.collection<Order>("orders"),
+  orders: memoryStore.collection<Order>("orders", data.orders),
   destinations: memoryStore.collection<Destination>("destinations"),
   subscriptions: memoryStore.collection<Subscription>("subscriptions"),
 };
@@ -19,6 +23,7 @@ const db = {
 export class Context {
   RequestHandler = RequestHandler;
   ResponseFactory = ResponseFactory;
+  RestrictedDataTokenHandler = RestrictedDataTokenHandler;
   z = {
     ...definitions,
     ...custom,

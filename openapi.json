@@ -4830,7 +4830,8 @@
       "type": "object",
       "required": [
         "method",
-        "path"
+        "path",
+        "dataElements"
       ],
       "properties": {
         "method": {

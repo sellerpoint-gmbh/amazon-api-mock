@@ -16,10 +16,10 @@ const defaultErrorMessage = {
 export class ResponseFactory {
   constructor(private request: CounterfactRequest) {}
 
-  public make(statusCode: number, payload: any = null) {
-    if (!payload) {
+  public make<T>(statusCode: number, body: T = null) {
+    if (!body) {
       if (statusCode >= 400) {
-        payload = {
+        body = {
           errors: [
             {
               code: `custom-${statusCode}`,
@@ -28,7 +28,7 @@ export class ResponseFactory {
                 "An unexpected error occurred.",
             },
           ],
-        };
+        } as T;
       }
     }
 
@@ -40,8 +40,8 @@ export class ResponseFactory {
       res = res.header(key, this.request.responseHeaders[key]);
     }
 
-    if (payload) {
-      return res.json({ payload });
+    if (body) {
+      return res.json(body);
     } else {
       return res.random();
     }

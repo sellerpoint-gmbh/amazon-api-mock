@@ -1,4 +1,3 @@
-
 export type Address = {
   Name: string;
   CompanyName?: string;
@@ -525,7 +524,7 @@ export type RejectionReason = {
 export type RestrictedResource = {
   method: "GET" | "PUT" | "POST" | "DELETE";
   path: string;
-  dataElements?: Array<string>;
+  dataElements: Array<string>;
 };
 export type ShipmentStatus = "ReadyForPickup" | "PickedUp" | "RefusedPickup";
 
