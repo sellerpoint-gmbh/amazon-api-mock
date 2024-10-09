@@ -10,6 +10,7 @@
     "generate:zod": "npm run generate:zod:definitions; npm run generate:zod:custom",
     "clean": "find lib -type f -name \"*.cjs\" -exec rm {} +; rm -rf ./api/.cache; rm -rf ./node_modules",
     "build:lib": "tsc ; find lib -type f -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' {} \\;",
+    "build:start": "npm run build:lib; npm run start",
     "start": "npx counterfact@latest ./openapi.json api --port 3100 -s",
     "docker:build": "docker build -t amazon-api-mock .",
     "docker:run": "docker run -p 3100:3100 amazon-api-mock"

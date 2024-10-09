@@ -40,10 +40,17 @@ export class ResponseFactory {
       res = res.header(key, this.request.responseHeaders[key]);
     }
 
-    if (body) {
-      return res.json(body);
-    } else {
-      return res.random();
-    }
+    console.log({
+      ts: new Date().toISOString(),
+      path: this.request.matchedPath, 
+      pathArgs: this.request.path,
+      headers: this.request.headers,
+      body: this.request.body,
+      query: this.request.query,
+      status: statusCode,
+      responseBody: body
+    })
+
+    return body ? res.json(body) : res.random();
   }
 }
