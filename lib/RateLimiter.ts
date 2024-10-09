@@ -1,43 +1,46 @@
 export interface RateLimiterArgs {
-	requestsPerSecond: number
-	burst: number
+  requestsPerSecond: number;
+  burst: number;
 }
 
 export class RateLimiter {
-	private tokens: Record<string, number>
-	private lastRefillTimestamp: Record<string, number>
-	private requestsPerSecond: number
-	private burst: number
+  private tokens: Record<string, number>;
+  private lastRefillTimestamp: Record<string, number>;
+  private requestsPerSecond: number;
+  private burst: number;
 
-	constructor(args: RateLimiterArgs) {
-		this.requestsPerSecond = args.requestsPerSecond
-		this.burst = args.burst
-		this.tokens = {}
-		this.lastRefillTimestamp = {}
-	}
+  constructor(args: RateLimiterArgs) {
+    this.requestsPerSecond = args.requestsPerSecond;
+    this.burst = args.burst;
+    this.tokens = {};
+    this.lastRefillTimestamp = {};
+  }
 
-	private refill(clientId: string) {
-		const now = Date.now()
-		const lastRefillTime = this.lastRefillTimestamp[clientId] || now
-		const elapsedTime = (now - lastRefillTime) / 1000
-		const refillTokens = elapsedTime * this.requestsPerSecond
+  private refill(clientId: string) {
+    const now = Date.now();
+    const lastRefillTime = this.lastRefillTimestamp[clientId] || now;
+    const elapsedTime = (now - lastRefillTime) / 1000;
+    const refillTokens = elapsedTime * this.requestsPerSecond;
 
-		this.tokens[clientId] = Math.min(this.burst, (this.tokens[clientId] || this.burst) + refillTokens)
-		this.lastRefillTimestamp[clientId] = now
-	}
+    this.tokens[clientId] = Math.min(
+      this.burst,
+      (this.tokens[clientId] || this.burst) + refillTokens,
+    );
+    this.lastRefillTimestamp[clientId] = now;
+  }
 
-	public allow(clientId: string): boolean {
-		this.refill(clientId)
+  public allow(clientId: string): boolean {
+    this.refill(clientId);
 
-		if ((this.tokens[clientId] || 0) > 0) {
-			this.tokens[clientId] -= 1
-			return true
-		} else {
-			return false
-		}
-	}
+    if ((this.tokens[clientId] || 0) > 0) {
+      this.tokens[clientId] -= 1;
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-	public getTokens(clientId: string) {
-		return this.tokens[clientId]
-	}
+  public getTokens(clientId: string) {
+    return this.tokens[clientId];
+  }
 }

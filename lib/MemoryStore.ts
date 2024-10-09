@@ -1,47 +1,59 @@
-class Collection {
-	private data: any[] = []
+class Collection<T> {
+  private data: any[] = [];
 
-	public findOne(query: any) {
-		return this.data.find(item => {
-			return Object.keys(query).every(key => item[key] === query[key])
-		})
-	}
+  public findOne(query: Partial<T>): T {
+    return this.data.find((item) => {
+      return Object.keys(query).every((key) => item[key] === query[key]);
+    });
+  }
 
-	public findAll(query: any = null) {
-		if (!query) return this.data
+  public findAll(query: Partial<T> = null): T[] {
+    if (!query) return this.data;
 
-		return this.data.filter(item => {
-			return Object.keys(query).every(key => item[key] === query[key])
-		})
-	}
+    return this.data.filter((item) => {
+      return Object.keys(query).every((key) => item[key] === query[key]);
+    });
+  }
 
-	public insert(item: any) {
-		this.data.push(item)
-	}
+  public insert(item: T): T {
+    this.data.push(item);
+    return item;
+  }
 
-	public update(query: any, item: any) {
-		const index = this.data.findIndex(i => Object.keys(query).every(key => i[key] === query[key]))
-		if (index > -1) {
-			this.data[index] = item
-		}
-	}
+  public update(query: Partial<T>, item: any): T | null {
+    const index = this.data.findIndex((i) =>
+      Object.keys(query).every((key) => i[key] === query[key]),
+    );
+    if (index > -1) {
+      this.data[index] = item;
+      return item;
+    } else {
+      return null;
+    }
+  }
 
-	public delete(query: any) {
-		const index = this.data.findIndex(i => Object.keys(query).every(key => i[key] === query[key]))
-		if (index > -1) {
-			this.data.splice(index, 1)
-		}
-	}
+  public delete(query: Partial<T>): boolean {
+    const index = this.data.findIndex((i) =>
+      Object.keys(query).every((key) => i[key] === query[key]),
+    );
+
+    if (index > -1) {
+      this.data.splice(index, 1);
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 export class MemoryStore {
-	private collections: Record<string, Collection> = {}
+  private collections: Record<string, Collection<any>> = {};
 
-	public collection(name: string) {
-		if (!this.collections[name]) {
-			this.collections[name] = new Collection()
-		}
+  public collection<T>(name: string): Collection<T> {
+    if (!this.collections[name]) {
+      this.collections[name] = new Collection<T>();
+    }
 
-		return this.collections[name]
-	}
+    return this.collections[name];
+  }
 }

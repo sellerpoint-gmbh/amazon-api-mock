@@ -1,4 +1,3 @@
-
 export type Address = {
   Name: string;
   CompanyName?: string;
