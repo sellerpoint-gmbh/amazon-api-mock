@@ -10,7 +10,8 @@ export const GET: HTTP_GET = (_req) =>
         burst: 30,
       },
       validation: {
-        path: "orderId",
+        path: { orderId: "orderId" },
+        query: _req.context.z.getOrderItemsQuerySchema.strict(),
       },
     },
     (req: typeof _req) => {

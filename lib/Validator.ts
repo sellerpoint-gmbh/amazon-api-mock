@@ -3,7 +3,7 @@ import { CounterfactRequest } from "./types/counterfact";
 
 export interface ValidatorArgs {
   jsonBody?: z.AnyZodObject;
-  path?: Record<string, "orderId" | "uuid" | RegExp>;
+  path?: Record<string, "notificationType" | "orderId" | "uuid" | RegExp>;
   query?: z.AnyZodObject;
 }
 
@@ -14,33 +14,64 @@ export interface ValidatorResponse {
 
 export class Validator {
   private jsonBodyValidator: z.AnyZodObject;
-  private pathValidator: Record<string, RegExp> = {};
+  private pathValidator: z.AnyZodObject;
   private queryValidator: z.AnyZodObject;
 
   constructor(args: ValidatorArgs) {
     this.jsonBodyValidator = args.jsonBody;
     this.queryValidator = args.query;
-
-    for (const key in args.path) {
-      switch (args.path[key]) {
-        case "orderId":
-          this.pathValidator[key] = /\d{3}-\d{7}-\d{7}/;
-          break;
-        case "uuid":
-          this.pathValidator[key] =
-            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-          break;
-        default:
-          this.pathValidator[key] = args.path[key];
-      }
-    }
+    this.pathValidator = this.makePathValidator(args.path);
   }
 
-  private validateJsonBody(request: CounterfactRequest): any[] {
+  private makePathValidator(
+    args: Record<string, "notificationType" | "orderId" | "uuid" | RegExp>,
+  ) {
+    let validatorObj = {};
+    for (const key in args) {
+      switch (args[key]) {
+        case "orderId":
+          validatorObj[key] = z.string().regex(/\d{3}-\d{7}-\d{7}/);
+          break;
+        case "uuid":
+          validatorObj[key] = z.string().uuid();
+          break;
+        case "notificationType":
+          validatorObj[key] = z.enum([
+            "ACCOUNT_STATUS_CHANGED",
+            "ANY_OFFER_CHANGED",
+            "B2B_ANY_OFFER_CHANGED",
+            "BRANDED_ITEM_CONTENT_CHANGE",
+            "DETAIL_PAGE_TRAFFIC_EVENT",
+            "FBA_INVENTORY_AVAILABILITY_CHANGES",
+            "FBA_OUTBOUND_SHIPMENT_STATUS",
+            "FEE_PROMOTION",
+            "FEED_PROCESSING_FINISHED",
+            "FULFILLMENT_ORDER_STATUS",
+            "ITEM_INVENTORY_EVENT_CHANGE",
+            "ITEM_SALES_EVENT_CHANGE",
+            "ITEM_PRODUCT_TYPE_CHANGE",
+            "LISTINGS_ITEM_STATUS_CHANGE",
+            "LISTINGS_ITEM_ISSUES_CHANGE",
+            "LISTINGS_ITEM_MFN_QUANTITY_CHANGE",
+            "ORDER_CHANGE",
+            "PRICING_HEALTH",
+            "PRODUCT_TYPE_DEFINITIONS_CHANGE",
+            "REPORT_PROCESSING_FINISHED",
+          ]);
+          break;
+        default:
+          validatorObj[key] = z.string().regex(args[key]);
+      }
+    }
+
+    return z.object(validatorObj).strict();
+  }
+
+  private validate(validator: z.AnyZodObject, obj: any): any[] {
     let validationErrors = [];
 
-    if (this.jsonBodyValidator) {
-      const validationResponse = this.jsonBodyValidator.safeParse(request.body);
+    if (validator) {
+      const validationResponse = validator.safeParse(obj);
       if (!validationResponse.success) {
         validationErrors.push(
           ...validationResponse.error.issues.map((e) => ({
@@ -54,48 +85,11 @@ export class Validator {
     return validationErrors;
   }
 
-  private validatePath(request: CounterfactRequest): any[] {
-    let validationErrors = [];
-
-    if (this.pathValidator) {
-      for (const key in this.pathValidator) {
-        if (!this.pathValidator[key].test(request.path[key])) {
-          validationErrors.push({
-            code: "custom-2",
-            message: `Invalid path variable "${key}"`,
-          });
-        }
-      }
-    }
-
-    return validationErrors;
-  }
-
-  private validateQuery(request: CounterfactRequest): any[] {
-    let validationErrors = [];
-
-		console.log(request)
-
-    if (this.queryValidator) {
-      const validationResponse = this.queryValidator.safeParse(request.query);
-      if (!validationResponse.success) {
-        validationErrors.push(
-          ...validationResponse.error.issues.map((e) => ({
-            code: "custom-3",
-            message: JSON.stringify(e),
-          })),
-        );
-      }
-    }
-
-    return validationErrors;
-  }
-
   public process(request: CounterfactRequest) {
     const validationErrors = [
-      ...this.validateJsonBody(request),
-      ...this.validatePath(request),
-      ...this.validateQuery(request),
+      ...this.validate(this.jsonBodyValidator, request.body),
+      ...this.validate(this.pathValidator, request.path),
+      ...this.validate(this.queryValidator, request.query),
     ];
 
     if (validationErrors.length) {

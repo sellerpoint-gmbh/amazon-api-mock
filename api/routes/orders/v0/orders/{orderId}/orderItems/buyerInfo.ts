@@ -11,6 +11,7 @@ export const GET: HTTP_GET = (_req) =>
       },
       validation: {
         path: { orderId: "orderId" },
+        query: _req.context.z.getOrderItemsBuyerInfoQuerySchema.strict(),
       },
     },
     (req: typeof _req) => {

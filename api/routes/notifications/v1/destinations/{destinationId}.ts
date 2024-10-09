@@ -11,7 +11,7 @@ export const GET: HTTP_GET = (_req) =>
         burst: 5,
       },
       validation: {
-        path: "uuid",
+        path: { destinationId: "uuid" },
       },
       grantless: true,
     },
@@ -39,7 +39,7 @@ export const DELETE: HTTP_DELETE = (_req) =>
         burst: 5,
       },
       validation: {
-        path: "uuid",
+        path: { destinationId: "uuid" },
       },
       grantless: true,
     },

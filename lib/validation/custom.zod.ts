@@ -29,3 +29,15 @@ export const getOrdersQuerySchema = z.object({
   LatestDeliveryDateBefore: z.string().optional(),
   LatestDeliveryDateAfter: z.string().optional(),
 });
+
+export const getOrderItemsQuerySchema = z.object({
+  NextToken: z.string().optional(),
+});
+
+export const getOrderItemsBuyerInfoQuerySchema = z.object({
+  NextToken: z.string().optional(),
+});
+
+export const getSubscriptionQuerySchema = z.object({
+  payloadVersion: z.string().optional(),
+});
