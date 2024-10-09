@@ -15,7 +15,7 @@ export const GET: HTTP_GET = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory(req);
+      const responseFactory = new req.context.ResponseFactory<GetOrdersResponse>(req);
       const orders = req.context.db.orders.findAll();
 
       const dataElements = req.context.RestrictedDataTokenHandler.allow(req);
@@ -33,7 +33,7 @@ export const GET: HTTP_GET = (_req) =>
           : undefined,
       }));
 
-      return responseFactory.make<GetOrdersResponse>(200, {
+      return responseFactory.make(200, {
         payload: { Orders: restrictedOrders },
       });
     },

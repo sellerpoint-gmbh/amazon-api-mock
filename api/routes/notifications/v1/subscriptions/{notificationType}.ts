@@ -1,3 +1,4 @@
+import { CreateSubscriptionResponse } from "../../../../types/definitions/CreateSubscriptionResponse.js";
 import { Subscription } from "../../../../types/definitions/Subscription.js";
 import type { HTTP_GET } from "../../../../types/paths/notifications/v1/subscriptions/{notificationType}.types.js";
 import type { HTTP_POST } from "../../../../types/paths/notifications/v1/subscriptions/{notificationType}.types.js";
@@ -22,7 +23,7 @@ export const GET: HTTP_GET = (_req) =>
       const responseFactory = new req.context.ResponseFactory(req);
       const subscription = req.context.db.subscriptions.findOne();
 
-      return responseFactory.make(200, subscription);
+      return responseFactory.make(200, { payload: subscription });
     },
   );
 
@@ -43,7 +44,7 @@ export const POST: HTTP_POST = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory(req);
+      const responseFactory = new req.context.ResponseFactory<CreateSubscriptionResponse>(req);
 
       const subcription = req.context.db.subscriptions.insert({
         subscriptionId: req.context.dep.crypto.randomUUID(),
@@ -52,6 +53,6 @@ export const POST: HTTP_POST = (_req) =>
         processingDirective: req.body.processingDirective,
       } as Subscription);
 
-      return responseFactory.make(200, subcription);
+      return responseFactory.make(200, { payload: subcription});
     },
   );

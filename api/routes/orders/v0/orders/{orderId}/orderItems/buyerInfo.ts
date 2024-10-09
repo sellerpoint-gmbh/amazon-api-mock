@@ -1,3 +1,4 @@
+import { GetOrderItemsBuyerInfoResponse } from "../../../../../../types/definitions/GetOrderItemsBuyerInfoResponse.js";
 import type { HTTP_GET } from "../../../../../../types/paths/orders/v0/orders/{orderId}/orderItems/buyerInfo.types.js";
 
 export const GET: HTTP_GET = (_req) =>
@@ -15,7 +16,7 @@ export const GET: HTTP_GET = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory(req);
+      const responseFactory = new req.context.ResponseFactory<GetOrderItemsBuyerInfoResponse>(req);
 
       return responseFactory.make(200);
     },

@@ -27,7 +27,7 @@ export const GET: HTTP_GET = (_req) =>
         return responseFactory.make(404);
       }
 
-      return responseFactory.make(200, subscription);
+      return responseFactory.make(200, { payload: subscription });
     },
   );
 

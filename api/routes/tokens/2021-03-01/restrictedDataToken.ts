@@ -16,14 +16,11 @@ export const POST: HTTP_POST = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory(req);
+      const responseFactory = new req.context.ResponseFactory<CreateRestrictedDataTokenResponse>(req);
       const response = _req.context.RestrictedDataTokenHandler.generate(
         req.body,
       );
 
-      return responseFactory.make<CreateRestrictedDataTokenResponse>(
-        200,
-        response,
-      );
+      return responseFactory.make(200, response);
     },
   );

@@ -13,10 +13,10 @@ const defaultErrorMessage = {
   503: "Temporary overloading or maintenance of the server.",
 };
 
-export class ResponseFactory {
+export class ResponseFactory<T> {
   constructor(private request: CounterfactRequest) {}
 
-  public make<T>(statusCode: number, body: T = null) {
+  public make(statusCode: number, body: T = null) {
     if (!body) {
       if (statusCode >= 400) {
         body = {
