@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "format": "prettier --write 'lib/**/*.ts' ; prettier --write 'api/**/*.ts'",
+    "generate:force": "npx counterfact@latest ./openapi.json api -g && grep -h -v '^import' ./api/types/definitions/*.ts > ./api/types/definitions.merged.ts",
     "generate:types": "npx counterfact@latest ./openapi.json api --generate-types && grep -h -v '^import' ./api/types/definitions/*.ts > ./api/types/definitions.merged.ts",
     "generate:zod:custom": "npx ts-to-zod ./lib/validation/custom.d.ts ./lib/validation/custom.zod.ts",
     "generate:zod:definitions": "npx ts-to-zod ./api/types/definitions.merged.ts ./lib/validation/definitions.zod.ts",

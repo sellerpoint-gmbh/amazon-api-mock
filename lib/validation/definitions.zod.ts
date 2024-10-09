@@ -50,6 +50,22 @@ export const marketplaceIdSchema = z.string();
 
 export const constraintTypeSchema = z.literal("MANDATORY");
 
+export const restrictedResourceSchema = z.object({
+  method: z.union([
+    z.literal("GET"),
+    z.literal("PUT"),
+    z.literal("POST"),
+    z.literal("DELETE"),
+  ]),
+  path: z.string(),
+  dataElements: z.array(z.string()).optional(),
+});
+
+export const createRestrictedDataTokenResponseSchema = z.object({
+  restrictedDataToken: z.string().optional(),
+  expiresIn: z.number().optional(),
+});
+
 export const otherDeliveryAttributesSchema = z.union([
   z.literal("HAS_ACCESS_POINT"),
   z.literal("PALLET_ENABLED"),
@@ -390,6 +406,11 @@ export const packageDetailSchema = z.object({
 export const destinationResourceSpecificationSchema = z.object({
   sqs: sqsResourceSchema.optional(),
   eventBridge: eventBridgeResourceSpecificationSchema.optional(),
+});
+
+export const createRestrictedDataTokenRequestSchema = z.object({
+  targetApplication: z.string().optional(),
+  restrictedResources: z.array(restrictedResourceSchema),
 });
 
 export const deleteDestinationResponseSchema = z.object({

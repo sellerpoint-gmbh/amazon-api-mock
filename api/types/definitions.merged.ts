@@ -1,3 +1,4 @@
+
 export type Address = {
   Name: string;
   CompanyName?: string;
@@ -97,6 +98,15 @@ export type CreateDestinationRequest = {
 export type CreateDestinationResponse = {
   payload?: Destination;
   errors?: ErrorList;
+};
+
+export type CreateRestrictedDataTokenRequest = {
+  targetApplication?: string;
+  restrictedResources: Array<RestrictedResource>;
+};
+export type CreateRestrictedDataTokenResponse = {
+  restrictedDataToken?: string;
+  expiresIn?: number;
 };
 
 export type CreateSubscriptionRequest = {
@@ -511,6 +521,11 @@ export type RegulatedOrderVerificationStatus = {
 export type RejectionReason = {
   RejectionReasonId: string;
   RejectionReasonDescription: string;
+};
+export type RestrictedResource = {
+  method: "GET" | "PUT" | "POST" | "DELETE";
+  path: string;
+  dataElements?: Array<string>;
 };
 export type ShipmentStatus = "ReadyForPickup" | "PickedUp" | "RefusedPickup";
 
