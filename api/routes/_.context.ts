@@ -20,14 +20,19 @@ const db = {
   subscriptions: memoryStore.collection<Subscription>("subscriptions"),
 };
 
+type ContextValidator = Record<keyof typeof db, dep.z.ZodArray<any>> & typeof definitions & typeof custom
+
 export class Context {
   RequestHandler = RequestHandler;
   ResponseFactory = ResponseFactory;
   RestrictedDataTokenHandler = RestrictedDataTokenHandler;
-  z = {
+  z: ContextValidator = {
     ...definitions,
     ...custom,
-  };
+    orders: dep.z.array(definitions.orderSchema.strict()),
+    destinations: dep.z.array(definitions.destinationSchema.strict()),
+    subscriptions: dep.z.array(definitions.subscriptionSchema.strict()),
+  }
   dep = dep;
   db = db;
 }

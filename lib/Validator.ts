@@ -3,7 +3,7 @@ import { CounterfactRequest } from "./types/counterfact";
 
 export interface ValidatorArgs {
   jsonBody?: z.AnyZodObject;
-  path?: Record<string, "notificationType" | "orderId" | "uuid" | RegExp>;
+  path?: Record<string, "notificationType" | "orderId" | "uuid" | z.AnyZodObject>;
   query?: z.AnyZodObject;
 }
 
@@ -24,7 +24,7 @@ export class Validator {
   }
 
   private makePathValidator(
-    args: Record<string, "notificationType" | "orderId" | "uuid" | RegExp>,
+    args: Record<string, "notificationType" | "orderId" | "uuid"  | z.AnyZodObject>,
   ) {
     let validatorObj = {};
     for (const key in args) {
@@ -60,7 +60,7 @@ export class Validator {
           ]);
           break;
         default:
-          validatorObj[key] = z.string().regex(args[key]);
+          validatorObj[key] = args[key]
       }
     }
 

@@ -1,5 +1,5 @@
-class Collection<T> {
-  constructor(private data: any[]) {}
+export class Collection<T> {
+  constructor(private data: T[]) {}
 
   public findOne(query: Partial<T>): T {
     return this.data.find((item) => {
@@ -43,6 +43,10 @@ class Collection<T> {
     } else {
       return false;
     }
+  }
+
+  public setData(data: T[]){
+    this.data = data
   }
 }
 
