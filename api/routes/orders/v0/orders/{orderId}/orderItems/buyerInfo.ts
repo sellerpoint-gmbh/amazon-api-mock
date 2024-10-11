@@ -22,8 +22,6 @@ export const GET: HTTP_GET = _req =>
 				AmazonOrderId: req.path.orderId,
 			})
 
-			console.log({ orderItemsList })
-
 			if (!orderItemsList) {
 				return responseFactory.make(404)
 			}
