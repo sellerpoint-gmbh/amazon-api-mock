@@ -79,7 +79,7 @@ You can read the internal store by sending a `GET` request to `/admin/store/{col
 ### `api/types`
 
 - Types are automatically generated from the OpenAPI spec with `npm run generate:types`
-- Do not modify these files directly
+- Do not modify these files directly. Modify the `openapi.json` file instead.
 
 ### `lib`
 
