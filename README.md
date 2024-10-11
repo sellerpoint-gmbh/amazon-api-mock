@@ -8,7 +8,7 @@ The mock server is running at [https://amazon-api-mock-production-11956aa4a78892
 
 To mock an API call replace the `https://sellingpartnerapi-na.amazon.com` with `https://amazon-api-mock-production-11956aa4a78892c3.up.railway.app` in the API call URL.
 
-### Supported API's
+### Supported APIs
 
 - [Notifications API v1](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-reference)
 - [Orders API v0](https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference)
