@@ -21,6 +21,10 @@ export const GET: HTTP_GET = _req =>
 				AmazonOrderId: req.path.orderId,
 			})
 
+			if (!order) {
+				return responseFactory.make(404)
+			}
+
 			const orderBuyerInfo = {
 				...order.BuyerInfo,
 				AmazonOrderId: order.AmazonOrderId,
