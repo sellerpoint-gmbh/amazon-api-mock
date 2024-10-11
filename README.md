@@ -1,4 +1,4 @@
-# Amazon-API-Mock
+# Amazon API Mock
 
 This is a mock server for [https://sellingpartnerapi-na.amazon.com](https://sellingpartnerapi-na.amazon.com). It allows you to test your integrations with Amazon APIs without actually making API calls.
 
