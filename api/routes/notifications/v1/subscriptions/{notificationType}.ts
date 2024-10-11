@@ -44,7 +44,8 @@ export const POST: HTTP_POST = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<CreateSubscriptionResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<CreateSubscriptionResponse>(req);
 
       const subcription = req.context.db.subscriptions.insert({
         subscriptionId: req.context.dep.crypto.randomUUID(),
@@ -53,6 +54,6 @@ export const POST: HTTP_POST = (_req) =>
         processingDirective: req.body.processingDirective,
       } as Subscription);
 
-      return responseFactory.make(200, { payload: subcription});
+      return responseFactory.make(200, { payload: subcription });
     },
   );

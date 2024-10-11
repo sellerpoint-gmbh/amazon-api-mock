@@ -42,14 +42,14 @@ export class ResponseFactory<T> {
 
     console.log({
       ts: new Date().toISOString(),
-      path: this.request.matchedPath, 
+      path: this.request.matchedPath,
       pathArgs: this.request.path,
       headers: this.request.headers,
       body: this.request.body,
       query: this.request.query,
       status: statusCode,
-      responseBody: body
-    })
+      responseBody: body,
+    });
 
     return body ? res.json(body) : res.random();
   }

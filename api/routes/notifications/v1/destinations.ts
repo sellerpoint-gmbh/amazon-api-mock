@@ -16,7 +16,8 @@ export const GET: HTTP_GET = (_req) =>
       grantless: true,
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<GetDestinationsResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<GetDestinationsResponse>(req);
       const destinations = req.context.db.destinations.findAll();
 
       return responseFactory.make(200, { payload: destinations });
@@ -38,7 +39,8 @@ export const POST: HTTP_POST = (_req) =>
       grantless: true,
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<CreateDestinationResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<CreateDestinationResponse>(req);
       const destination = req.context.db.destinations.insert({
         name: req.body.name,
         destinationId: req.context.dep.crypto.randomUUID(),

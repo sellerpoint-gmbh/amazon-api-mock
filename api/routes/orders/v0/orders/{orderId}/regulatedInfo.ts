@@ -16,7 +16,8 @@ export const GET: HTTP_GET = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<GetOrderRegulatedInfoResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<GetOrderRegulatedInfoResponse>(req);
 
       return responseFactory.make(200);
     },

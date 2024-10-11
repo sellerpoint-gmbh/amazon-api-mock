@@ -45,8 +45,8 @@ export class Collection<T> {
     }
   }
 
-  public setData(data: T[]){
-    this.data = data
+  public setData(data: T[]) {
+    this.data = data;
   }
 }
 

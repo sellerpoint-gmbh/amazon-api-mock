@@ -15,7 +15,9 @@ export const GET: HTTP_GET = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<GetOrderResponse>(req);
+      const responseFactory = new req.context.ResponseFactory<GetOrderResponse>(
+        req,
+      );
 
       const order = req.context.db.orders.findOne({
         AmazonOrderId: req.path.orderId,

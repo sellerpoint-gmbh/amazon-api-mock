@@ -18,7 +18,8 @@ export const GET: HTTP_GET = (_req) =>
       grantless: true,
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<GetDestinationResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<GetDestinationResponse>(req);
       const destination = req.context.db.destinations.findOne({
         destinationId: req.path.destinationId,
       });
@@ -46,7 +47,8 @@ export const DELETE: HTTP_DELETE = (_req) =>
       grantless: true,
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<DeleteDestinationResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<DeleteDestinationResponse>(req);
       const ok = req.context.db.destinations.delete({
         destinationId: req.path.destinationId,
       });

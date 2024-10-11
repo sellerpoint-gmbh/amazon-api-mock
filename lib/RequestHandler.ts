@@ -36,7 +36,9 @@ export class RequestHandler {
     request.responseHeaders = {};
 
     const rateLimiter = this.getRateLimiter(args);
-    const responseFactory = new ResponseFactory(request) as ResponseFactoryType<any>;
+    const responseFactory = new ResponseFactory(
+      request,
+    ) as ResponseFactoryType<any>;
 
     const clientId = "12345";
 

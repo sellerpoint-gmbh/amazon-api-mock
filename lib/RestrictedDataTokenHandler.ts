@@ -22,23 +22,22 @@ export class RestrictedDataTokenHandler {
       return [];
     }
 
-    try{
+    try {
       const decoded = jwt.verify(token, TOKEN_SECRET) as RestrictedDataToken;
-  
+
       const matchingResource = decoded.restrictedResources.find(
         (r) => r.path === request.matchedPath,
       );
-  
+
       if (!matchingResource) {
         return [];
       }
-  
-      return matchingResource.dataElements;
-    }
-    catch(e){
-      console.log(e)
 
-      return []
+      return matchingResource.dataElements;
+    } catch (e) {
+      console.log(e);
+
+      return [];
     }
   }
 

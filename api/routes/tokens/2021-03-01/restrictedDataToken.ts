@@ -16,7 +16,8 @@ export const POST: HTTP_POST = (_req) =>
       },
     },
     (req: typeof _req) => {
-      const responseFactory = new req.context.ResponseFactory<CreateRestrictedDataTokenResponse>(req);
+      const responseFactory =
+        new req.context.ResponseFactory<CreateRestrictedDataTokenResponse>(req);
       const response = _req.context.RestrictedDataTokenHandler.generate(
         req.body,
       );
