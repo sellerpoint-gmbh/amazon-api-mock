@@ -1,3 +1,3 @@
-import type { OrderChangeTypeEnum } from "./OrderChangeTypeEnum.js";
+import type { OrderChangeTypeEnum } from './OrderChangeTypeEnum.js';
 
 export type OrderChangeTypes = Array<OrderChangeTypeEnum>;

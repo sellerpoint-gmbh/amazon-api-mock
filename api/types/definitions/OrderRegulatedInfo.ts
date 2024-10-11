@@ -1,5 +1,5 @@
-import type { RegulatedInformation } from "./RegulatedInformation.js";
-import type { RegulatedOrderVerificationStatus } from "./RegulatedOrderVerificationStatus.js";
+import type { RegulatedInformation } from './RegulatedInformation.js';
+import type { RegulatedOrderVerificationStatus } from './RegulatedOrderVerificationStatus.js';
 
 export type OrderRegulatedInfo = {
   AmazonOrderId: string;

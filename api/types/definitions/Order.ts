@@ -1,14 +1,14 @@
-import type { Money } from "./Money.js";
-import type { PaymentExecutionDetailItemList } from "./PaymentExecutionDetailItemList.js";
-import type { PaymentMethodDetailItemList } from "./PaymentMethodDetailItemList.js";
-import type { EasyShipShipmentStatus } from "./EasyShipShipmentStatus.js";
-import type { Address } from "./Address.js";
-import type { BuyerTaxInformation } from "./BuyerTaxInformation.js";
-import type { FulfillmentInstruction } from "./FulfillmentInstruction.js";
-import type { MarketplaceTaxInfo } from "./MarketplaceTaxInfo.js";
-import type { BuyerInfo } from "./BuyerInfo.js";
-import type { AutomatedShippingSettings } from "./AutomatedShippingSettings.js";
-import type { ElectronicInvoiceStatus } from "./ElectronicInvoiceStatus.js";
+import type { Money } from './Money.js';
+import type { PaymentExecutionDetailItemList } from './PaymentExecutionDetailItemList.js';
+import type { PaymentMethodDetailItemList } from './PaymentMethodDetailItemList.js';
+import type { EasyShipShipmentStatus } from './EasyShipShipmentStatus.js';
+import type { Address } from './Address.js';
+import type { BuyerTaxInformation } from './BuyerTaxInformation.js';
+import type { FulfillmentInstruction } from './FulfillmentInstruction.js';
+import type { MarketplaceTaxInfo } from './MarketplaceTaxInfo.js';
+import type { BuyerInfo } from './BuyerInfo.js';
+import type { AutomatedShippingSettings } from './AutomatedShippingSettings.js';
+import type { ElectronicInvoiceStatus } from './ElectronicInvoiceStatus.js';
 
 export type Order = {
   AmazonOrderId: string;
@@ -16,15 +16,15 @@ export type Order = {
   PurchaseDate: string;
   LastUpdateDate: string;
   OrderStatus:
-    | "Pending"
-    | "Unshipped"
-    | "PartiallyShipped"
-    | "Shipped"
-    | "Canceled"
-    | "Unfulfillable"
-    | "InvoiceUnconfirmed"
-    | "PendingAvailability";
-  FulfillmentChannel?: "MFN" | "AFN";
+    | 'Pending'
+    | 'Unshipped'
+    | 'PartiallyShipped'
+    | 'Shipped'
+    | 'Canceled'
+    | 'Unfulfillable'
+    | 'InvoiceUnconfirmed'
+    | 'PendingAvailability';
+  FulfillmentChannel?: 'MFN' | 'AFN';
   SalesChannel?: string;
   OrderChannel?: string;
   ShipServiceLevel?: string;
@@ -32,18 +32,18 @@ export type Order = {
   NumberOfItemsShipped?: number;
   NumberOfItemsUnshipped?: number;
   PaymentExecutionDetail?: PaymentExecutionDetailItemList;
-  PaymentMethod?: "COD" | "CVS" | "Other";
+  PaymentMethod?: 'COD' | 'CVS' | 'Other';
   PaymentMethodDetails?: PaymentMethodDetailItemList;
   MarketplaceId?: string;
   ShipmentServiceLevelCategory?: string;
   EasyShipShipmentStatus?: EasyShipShipmentStatus;
   CbaDisplayableShippingLabel?: string;
   OrderType?:
-    | "StandardOrder"
-    | "LongLeadTimeOrder"
-    | "Preorder"
-    | "BackOrder"
-    | "SourcingOnDemandOrder";
+    | 'StandardOrder'
+    | 'LongLeadTimeOrder'
+    | 'Preorder'
+    | 'BackOrder'
+    | 'SourcingOnDemandOrder';
   EarliestShipDate?: string;
   LatestShipDate?: string;
   EarliestDeliveryDate?: string;
@@ -59,7 +59,7 @@ export type Order = {
   IsSoldByAB?: boolean;
   IsIBA?: boolean;
   DefaultShipFromLocationAddress?: Address;
-  BuyerInvoicePreference?: "INDIVIDUAL" | "BUSINESS";
+  BuyerInvoicePreference?: 'INDIVIDUAL' | 'BUSINESS';
   BuyerTaxInformation?: BuyerTaxInformation;
   FulfillmentInstruction?: FulfillmentInstruction;
   IsISPU?: boolean;

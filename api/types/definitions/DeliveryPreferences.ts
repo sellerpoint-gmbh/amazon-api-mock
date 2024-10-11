@@ -1,5 +1,5 @@
-import type { PreferredDeliveryTime } from "./PreferredDeliveryTime.js";
-import type { OtherDeliveryAttributes } from "./OtherDeliveryAttributes.js";
+import type { PreferredDeliveryTime } from './PreferredDeliveryTime.js';
+import type { OtherDeliveryAttributes } from './OtherDeliveryAttributes.js';
 
 export type DeliveryPreferences = {
   DropOffLocation?: string;

@@ -1,6 +1,6 @@
 export type ElectronicInvoiceStatus =
-  | "NotRequired"
-  | "NotFound"
-  | "Processing"
-  | "Errored"
-  | "Accepted";
+  | 'NotRequired'
+  | 'NotFound'
+  | 'Processing'
+  | 'Errored'
+  | 'Accepted';

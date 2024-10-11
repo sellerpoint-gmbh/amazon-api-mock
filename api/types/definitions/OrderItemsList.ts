@@ -1,4 +1,4 @@
-import type { OrderItemList } from "./OrderItemList.js";
+import type { OrderItemList } from './OrderItemList.js';
 
 export type OrderItemsList = {
   OrderItems: OrderItemList;

@@ -1,1 +1,1 @@
-export type OrderChangeTypeEnum = "OrderStatusChange" | "BuyerRequestedChange";
+export type OrderChangeTypeEnum = 'OrderStatusChange' | 'BuyerRequestedChange';

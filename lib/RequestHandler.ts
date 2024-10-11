@@ -1,17 +1,17 @@
 // @ts-ignore
-import { RateLimiter } from "./RateLimiter.cjs";
+import { RateLimiter } from './RateLimiter.cjs';
 // @ts-ignore
-import { Validator } from "./Validator.cjs";
+import { Validator } from './Validator.cjs';
 // @ts-ignore
-import { ResponseFactory } from "./ResponseFactory.cjs";
+import { ResponseFactory } from './ResponseFactory.cjs';
 
 import type {
   RateLimiterArgs,
   RateLimiter as RateLimiterType,
-} from "./RateLimiter";
-import type { ValidatorArgs, Validator as ValidatorType } from "./Validator";
-import type { ResponseFactory as ResponseFactoryType } from "./ResponseFactory";
-import { CounterfactRequest } from "./types/counterfact";
+} from './RateLimiter';
+import type { ValidatorArgs, Validator as ValidatorType } from './Validator';
+import type { ResponseFactory as ResponseFactoryType } from './ResponseFactory';
+import { CounterfactRequest } from './types/counterfact';
 
 export interface RequestHandlerArgs {
   name: string;
@@ -28,7 +28,7 @@ export class RequestHandler {
     if (name in this.rateLimiterMap) return this.rateLimiterMap[name];
 
     return (this.rateLimiterMap[name] = new RateLimiter(
-      rateLimit,
+      rateLimit
     ) as RateLimiterType);
   }
 
@@ -37,17 +37,20 @@ export class RequestHandler {
 
     const rateLimiter = this.getRateLimiter(args);
     const responseFactory = new ResponseFactory(
-      request,
+      request
     ) as ResponseFactoryType<any>;
 
-    const clientId = "12345";
+    const clientId =
+      request.headers['client-id'] ||
+      request.headers['user-agent'] ||
+      'unknown';
 
     if (rateLimiter) {
       if (!rateLimiter.allow(clientId)) {
         return responseFactory.make(429);
       }
 
-      request.responseHeaders["x-amzn-RateLimit-Limit"] = rateLimiter
+      request.responseHeaders['x-amzn-RateLimit-Limit'] = rateLimiter
         .getTokens(clientId)
         .toFixed(2);
     }

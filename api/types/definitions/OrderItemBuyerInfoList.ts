@@ -1,3 +1,3 @@
-import type { OrderItemBuyerInfo } from "./OrderItemBuyerInfo.js";
+import type { OrderItemBuyerInfo } from './OrderItemBuyerInfo.js';
 
 export type OrderItemBuyerInfoList = Array<OrderItemBuyerInfo>;

@@ -1,19 +1,19 @@
-import type { HTTP_GET } from "../../../../../types/paths/notifications/v1/subscriptions/{notificationType}/{subscriptionId}.types.js";
-import type { HTTP_DELETE } from "../../../../../types/paths/notifications/v1/subscriptions/{notificationType}/{subscriptionId}.types.js";
+import type { HTTP_GET } from '../../../../../types/paths/notifications/v1/subscriptions/{notificationType}/{subscriptionId}.types.js';
+import type { HTTP_DELETE } from '../../../../../types/paths/notifications/v1/subscriptions/{notificationType}/{subscriptionId}.types.js';
 
 export const GET: HTTP_GET = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "getSubscriptionById",
+      name: 'getSubscriptionById',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 5,
       },
       validation: {
         path: {
-          notificationType: "notificationType",
-          subscriptionId: "uuid",
+          notificationType: 'notificationType',
+          subscriptionId: 'uuid',
         },
       },
     },
@@ -28,22 +28,22 @@ export const GET: HTTP_GET = (_req) =>
       }
 
       return responseFactory.make(200, { payload: subscription });
-    },
+    }
   );
 
 export const DELETE: HTTP_DELETE = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "deleteSubscriptionById",
+      name: 'deleteSubscriptionById',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 5,
       },
       validation: {
         path: {
-          notificationType: "notificationType",
-          subscriptionId: "uuid",
+          notificationType: 'notificationType',
+          subscriptionId: 'uuid',
         },
       },
       grantless: true,
@@ -59,5 +59,5 @@ export const DELETE: HTTP_DELETE = (_req) =>
       } else {
         return responseFactory.make(404);
       }
-    },
+    }
   );

@@ -1,4 +1,4 @@
-import type { TransparencyCodeList } from "./TransparencyCodeList.js";
+import type { TransparencyCodeList } from './TransparencyCodeList.js';
 
 export type ConfirmShipmentOrderItem = {
   orderItemId: string;

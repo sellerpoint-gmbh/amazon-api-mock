@@ -24,7 +24,7 @@ export class RateLimiter {
 
     this.tokens[clientId] = Math.min(
       this.burst,
-      (this.tokens[clientId] || this.burst) + refillTokens,
+      (this.tokens[clientId] || this.burst) + refillTokens
     );
     this.lastRefillTimestamp[clientId] = now;
   }

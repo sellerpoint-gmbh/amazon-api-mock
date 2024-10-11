@@ -1,6 +1,6 @@
 export type RegulatedInformationField = {
   FieldId: string;
   FieldLabel: string;
-  FieldType: "Text" | "FileAttachment";
+  FieldType: 'Text' | 'FileAttachment';
   FieldValue: string;
 };

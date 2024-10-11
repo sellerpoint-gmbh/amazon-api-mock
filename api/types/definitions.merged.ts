@@ -13,7 +13,7 @@ export type Address = {
   CountryCode?: string;
   Phone?: string;
   ExtendedFields?: AddressExtendedFields;
-  AddressType?: "Residential" | "Commercial";
+  AddressType?: 'Residential' | 'Commercial';
 };
 export type AddressExtendedFields = {
   StreetName?: string;
@@ -27,7 +27,7 @@ export type AggregationFilter = { aggregationSettings?: AggregationSettings };
 export type AggregationSettings = {
   aggregationTimePeriod: AggregationTimePeriod;
 };
-export type AggregationTimePeriod = "FiveMinutes" | "TenMinutes";
+export type AggregationTimePeriod = 'FiveMinutes' | 'TenMinutes';
 export type AmazonPrograms = { Programs: Array<string> };
 
 export type AssociatedItem = {
@@ -35,7 +35,7 @@ export type AssociatedItem = {
   OrderItemId?: string;
   AssociationType?: AssociationType;
 };
-export type AssociationType = "VALUE_ADD_SERVICE";
+export type AssociationType = 'VALUE_ADD_SERVICE';
 export type AutomatedShippingSettings = {
   HasAutomatedShippingSettings?: boolean;
   AutomatedCarrier?: string;
@@ -43,7 +43,7 @@ export type AutomatedShippingSettings = {
 };
 
 export type BusinessHours = {
-  DayOfWeek?: "SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT";
+  DayOfWeek?: 'SUN' | 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT';
   OpenIntervals?: Array<OpenInterval>;
 };
 export type BuyerCustomizedInfoDetail = { CustomizedURL?: string };
@@ -84,10 +84,10 @@ export type ConfirmShipmentOrderItemsList = Array<ConfirmShipmentOrderItem>;
 
 export type ConfirmShipmentRequest = {
   packageDetail: PackageDetail;
-  codCollectionMethod?: "DirectPayment";
+  codCollectionMethod?: 'DirectPayment';
   marketplaceId: MarketplaceId;
 };
-export type ConstraintType = "MANDATORY";
+export type ConstraintType = 'MANDATORY';
 
 export type CreateDestinationRequest = {
   resourceSpecification: DestinationResourceSpecification;
@@ -146,28 +146,28 @@ export type DestinationResourceSpecification = {
   eventBridge?: EventBridgeResourceSpecification;
 };
 export type EasyShipShipmentStatus =
-  | "PendingSchedule"
-  | "PendingPickUp"
-  | "PendingDropOff"
-  | "LabelCanceled"
-  | "PickedUp"
-  | "DroppedOff"
-  | "AtOriginFC"
-  | "AtDestinationFC"
-  | "Delivered"
-  | "RejectedByBuyer"
-  | "Undeliverable"
-  | "ReturningToSeller"
-  | "ReturnedToSeller"
-  | "Lost"
-  | "OutForDelivery"
-  | "Damaged";
+  | 'PendingSchedule'
+  | 'PendingPickUp'
+  | 'PendingDropOff'
+  | 'LabelCanceled'
+  | 'PickedUp'
+  | 'DroppedOff'
+  | 'AtOriginFC'
+  | 'AtDestinationFC'
+  | 'Delivered'
+  | 'RejectedByBuyer'
+  | 'Undeliverable'
+  | 'ReturningToSeller'
+  | 'ReturnedToSeller'
+  | 'Lost'
+  | 'OutForDelivery'
+  | 'Damaged';
 export type ElectronicInvoiceStatus =
-  | "NotRequired"
-  | "NotFound"
-  | "Processing"
-  | "Errored"
-  | "Accepted";
+  | 'NotRequired'
+  | 'NotFound'
+  | 'Processing'
+  | 'Errored'
+  | 'Accepted';
 export type Error = { code: string; message: string; details?: string };
 
 export type ErrorList = Array<Error>;
@@ -184,7 +184,7 @@ export type EventBridgeResourceSpecification = {
 export type EventFilter = AggregationFilter &
   MarketplaceFilter &
   OrderChangeTypeFilter & {
-    eventFilterType: "ANY_OFFER_CHANGED" | "ORDER_CHANGE";
+    eventFilterType: 'ANY_OFFER_CHANGED' | 'ORDER_CHANGE';
   };
 
 export type ExceptionDates = {
@@ -250,30 +250,30 @@ export type MarketplaceTaxInfo = {
 };
 export type Measurement = {
   Unit:
-    | "OUNCES"
-    | "POUNDS"
-    | "KILOGRAMS"
-    | "GRAMS"
-    | "MILLIGRAMS"
-    | "INCHES"
-    | "FEET"
-    | "METERS"
-    | "CENTIMETERS"
-    | "MILLIMETERS"
-    | "SQUARE_METERS"
-    | "SQUARE_CENTIMETERS"
-    | "SQUARE_FEET"
-    | "SQUARE_INCHES"
-    | "GALLONS"
-    | "PINTS"
-    | "QUARTS"
-    | "FLUID_OUNCES"
-    | "LITERS"
-    | "CUBIC_METERS"
-    | "CUBIC_FEET"
-    | "CUBIC_INCHES"
-    | "CUBIC_CENTIMETERS"
-    | "COUNT";
+    | 'OUNCES'
+    | 'POUNDS'
+    | 'KILOGRAMS'
+    | 'GRAMS'
+    | 'MILLIGRAMS'
+    | 'INCHES'
+    | 'FEET'
+    | 'METERS'
+    | 'CENTIMETERS'
+    | 'MILLIMETERS'
+    | 'SQUARE_METERS'
+    | 'SQUARE_CENTIMETERS'
+    | 'SQUARE_FEET'
+    | 'SQUARE_INCHES'
+    | 'GALLONS'
+    | 'PINTS'
+    | 'QUARTS'
+    | 'FLUID_OUNCES'
+    | 'LITERS'
+    | 'CUBIC_METERS'
+    | 'CUBIC_FEET'
+    | 'CUBIC_INCHES'
+    | 'CUBIC_CENTIMETERS'
+    | 'COUNT';
   Value: number;
 };
 export type Money = { CurrencyCode?: string; Amount?: string };
@@ -290,15 +290,15 @@ export type Order = {
   PurchaseDate: string;
   LastUpdateDate: string;
   OrderStatus:
-    | "Pending"
-    | "Unshipped"
-    | "PartiallyShipped"
-    | "Shipped"
-    | "Canceled"
-    | "Unfulfillable"
-    | "InvoiceUnconfirmed"
-    | "PendingAvailability";
-  FulfillmentChannel?: "MFN" | "AFN";
+    | 'Pending'
+    | 'Unshipped'
+    | 'PartiallyShipped'
+    | 'Shipped'
+    | 'Canceled'
+    | 'Unfulfillable'
+    | 'InvoiceUnconfirmed'
+    | 'PendingAvailability';
+  FulfillmentChannel?: 'MFN' | 'AFN';
   SalesChannel?: string;
   OrderChannel?: string;
   ShipServiceLevel?: string;
@@ -306,18 +306,18 @@ export type Order = {
   NumberOfItemsShipped?: number;
   NumberOfItemsUnshipped?: number;
   PaymentExecutionDetail?: PaymentExecutionDetailItemList;
-  PaymentMethod?: "COD" | "CVS" | "Other";
+  PaymentMethod?: 'COD' | 'CVS' | 'Other';
   PaymentMethodDetails?: PaymentMethodDetailItemList;
   MarketplaceId?: string;
   ShipmentServiceLevelCategory?: string;
   EasyShipShipmentStatus?: EasyShipShipmentStatus;
   CbaDisplayableShippingLabel?: string;
   OrderType?:
-    | "StandardOrder"
-    | "LongLeadTimeOrder"
-    | "Preorder"
-    | "BackOrder"
-    | "SourcingOnDemandOrder";
+    | 'StandardOrder'
+    | 'LongLeadTimeOrder'
+    | 'Preorder'
+    | 'BackOrder'
+    | 'SourcingOnDemandOrder';
   EarliestShipDate?: string;
   LatestShipDate?: string;
   EarliestDeliveryDate?: string;
@@ -333,7 +333,7 @@ export type Order = {
   IsSoldByAB?: boolean;
   IsIBA?: boolean;
   DefaultShipFromLocationAddress?: Address;
-  BuyerInvoicePreference?: "INDIVIDUAL" | "BUSINESS";
+  BuyerInvoicePreference?: 'INDIVIDUAL' | 'BUSINESS';
   BuyerTaxInformation?: BuyerTaxInformation;
   FulfillmentInstruction?: FulfillmentInstruction;
   IsISPU?: boolean;
@@ -362,7 +362,7 @@ export type OrderBuyerInfo = {
   BuyerTaxInfo?: BuyerTaxInfo;
   PurchaseOrderNumber?: string;
 };
-export type OrderChangeTypeEnum = "OrderStatusChange" | "BuyerRequestedChange";
+export type OrderChangeTypeEnum = 'OrderStatusChange' | 'BuyerRequestedChange';
 
 export type OrderChangeTypeFilter = { orderChangeTypes?: OrderChangeTypes };
 
@@ -401,7 +401,7 @@ export type OrderItem = {
   IsTransparency?: boolean;
   IossNumber?: string;
   StoreChainStoreId?: string;
-  DeemedResellerCategory?: "IOSS" | "UOSS";
+  DeemedResellerCategory?: 'IOSS' | 'UOSS';
   BuyerInfo?: ItemBuyerInfo;
   BuyerRequestedCancel?: BuyerRequestedCancel;
   SerialNumbers?: Array<string>;
@@ -453,9 +453,9 @@ export type OrdersList = {
   CreatedBefore?: string;
 };
 export type OtherDeliveryAttributes =
-  | "HAS_ACCESS_POINT"
-  | "PALLET_ENABLED"
-  | "PALLET_DISABLED";
+  | 'HAS_ACCESS_POINT'
+  | 'PALLET_ENABLED'
+  | 'PALLET_DISABLED';
 
 export type PackageDetail = {
   packageReferenceId: PackageReferenceId;
@@ -504,7 +504,7 @@ export type RegulatedInformation = { Fields: Array<RegulatedInformationField> };
 export type RegulatedInformationField = {
   FieldId: string;
   FieldLabel: string;
-  FieldType: "Text" | "FileAttachment";
+  FieldType: 'Text' | 'FileAttachment';
   FieldValue: string;
 };
 
@@ -522,11 +522,11 @@ export type RejectionReason = {
   RejectionReasonDescription: string;
 };
 export type RestrictedResource = {
-  method: "GET" | "PUT" | "POST" | "DELETE";
+  method: 'GET' | 'PUT' | 'POST' | 'DELETE';
   path: string;
   dataElements: Array<string>;
 };
-export type ShipmentStatus = "ReadyForPickup" | "PickedUp" | "RefusedPickup";
+export type ShipmentStatus = 'ReadyForPickup' | 'PickedUp' | 'RefusedPickup';
 
 export type ShippingConstraints = {
   PalletDelivery?: ConstraintType;
@@ -555,15 +555,15 @@ export type SubstitutionOptionList = Array<SubstitutionOption>;
 
 export type SubstitutionPreferences = {
   SubstitutionType:
-    | "CUSTOMER_PREFERENCE"
-    | "AMAZON_RECOMMENDED"
-    | "DO_NOT_SUBSTITUTE";
+    | 'CUSTOMER_PREFERENCE'
+    | 'AMAZON_RECOMMENDED'
+    | 'DO_NOT_SUBSTITUTE';
   SubstitutionOptions?: SubstitutionOptionList;
 };
 export type TaxClassification = { Name?: string; Value?: string };
 export type TaxCollection = {
-  Model?: "MarketplaceFacilitator";
-  ResponsibleParty?: "Amazon Services, Inc.";
+  Model?: 'MarketplaceFacilitator';
+  ResponsibleParty?: 'Amazon Services, Inc.';
 };
 export type TransparencyCode = string;
 
@@ -597,8 +597,8 @@ export type ValidVerificationDetail = {
 
 export type VerificationDetails = { prescriptionDetail?: PrescriptionDetail };
 export type VerificationStatus =
-  | "Pending"
-  | "Approved"
-  | "Rejected"
-  | "Expired"
-  | "Cancelled";
+  | 'Pending'
+  | 'Approved'
+  | 'Rejected'
+  | 'Expired'
+  | 'Cancelled';

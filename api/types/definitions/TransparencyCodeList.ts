@@ -1,3 +1,3 @@
-import type { TransparencyCode } from "./TransparencyCode.js";
+import type { TransparencyCode } from './TransparencyCode.js';
 
 export type TransparencyCodeList = Array<TransparencyCode>;

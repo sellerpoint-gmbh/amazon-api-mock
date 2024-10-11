@@ -1,11 +1,11 @@
-import { GetOrdersResponse } from "../../../types/definitions/GetOrdersResponse.js";
-import type { HTTP_GET } from "../../../types/paths/orders/v0/orders.types.js";
+import { GetOrdersResponse } from '../../../types/definitions/GetOrdersResponse.js';
+import type { HTTP_GET } from '../../../types/paths/orders/v0/orders.types.js';
 
 export const GET: HTTP_GET = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "getOrders",
+      name: 'getOrders',
       rateLimit: {
         requestsPerSecond: 0.0167,
         burst: 20,
@@ -23,13 +23,13 @@ export const GET: HTTP_GET = (_req) =>
 
       const restrictedOrders = orders.map((order) => ({
         ...order,
-        ShippingAddress: dataElements.includes("shippingAddress")
+        ShippingAddress: dataElements.includes('shippingAddress')
           ? order.ShippingAddress
           : undefined,
-        BuyerInfo: dataElements.includes("buyerInfo")
+        BuyerInfo: dataElements.includes('buyerInfo')
           ? order.BuyerInfo
           : undefined,
-        BuyerTaxInformation: dataElements.includes("buyerTaxInformation")
+        BuyerTaxInformation: dataElements.includes('buyerTaxInformation')
           ? order.BuyerTaxInformation
           : undefined,
       }));
@@ -37,5 +37,5 @@ export const GET: HTTP_GET = (_req) =>
       return responseFactory.make(200, {
         payload: { Orders: restrictedOrders },
       });
-    },
+    }
   );

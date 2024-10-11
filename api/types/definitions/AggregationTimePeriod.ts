@@ -1,1 +1,1 @@
-export type AggregationTimePeriod = "FiveMinutes" | "TenMinutes";
+export type AggregationTimePeriod = 'FiveMinutes' | 'TenMinutes';

@@ -1,3 +1,3 @@
-import type { AggregationSettings } from "./AggregationSettings.js";
+import type { AggregationSettings } from './AggregationSettings.js';
 
 export type AggregationFilter = { aggregationSettings?: AggregationSettings };

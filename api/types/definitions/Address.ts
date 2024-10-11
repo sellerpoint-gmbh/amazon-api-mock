@@ -1,4 +1,4 @@
-import type { AddressExtendedFields } from "./AddressExtendedFields.js";
+import type { AddressExtendedFields } from './AddressExtendedFields.js';
 
 export type Address = {
   Name: string;
@@ -15,5 +15,5 @@ export type Address = {
   CountryCode?: string;
   Phone?: string;
   ExtendedFields?: AddressExtendedFields;
-  AddressType?: "Residential" | "Commercial";
+  AddressType?: 'Residential' | 'Commercial';
 };

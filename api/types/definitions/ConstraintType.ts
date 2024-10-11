@@ -1,1 +1,1 @@
-export type ConstraintType = "MANDATORY";
+export type ConstraintType = 'MANDATORY';

@@ -1,3 +1,3 @@
-import type { OrderChangeTypes } from "./OrderChangeTypes.js";
+import type { OrderChangeTypes } from './OrderChangeTypes.js';
 
 export type OrderChangeTypeFilter = { orderChangeTypes?: OrderChangeTypes };

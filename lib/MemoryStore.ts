@@ -22,7 +22,7 @@ export class Collection<T> {
 
   public update(query: Partial<T>, item: any): T | null {
     const index = this.data.findIndex((i) =>
-      Object.keys(query).every((key) => i[key] === query[key]),
+      Object.keys(query).every((key) => i[key] === query[key])
     );
     if (index > -1) {
       this.data[index] = item;
@@ -34,7 +34,7 @@ export class Collection<T> {
 
   public delete(query: Partial<T>): boolean {
     const index = this.data.findIndex((i) =>
-      Object.keys(query).every((key) => i[key] === query[key]),
+      Object.keys(query).every((key) => i[key] === query[key])
     );
 
     if (index > -1) {

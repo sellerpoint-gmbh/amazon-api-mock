@@ -1,6 +1,6 @@
 export type VerificationStatus =
-  | "Pending"
-  | "Approved"
-  | "Rejected"
-  | "Expired"
-  | "Cancelled";
+  | 'Pending'
+  | 'Approved'
+  | 'Rejected'
+  | 'Expired'
+  | 'Cancelled';

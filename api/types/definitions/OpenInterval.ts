@@ -1,4 +1,4 @@
-import type { OpenTimeInterval } from "./OpenTimeInterval.js";
+import type { OpenTimeInterval } from './OpenTimeInterval.js';
 
 export type OpenInterval = {
   StartTime?: OpenTimeInterval;

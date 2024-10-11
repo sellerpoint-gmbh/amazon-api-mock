@@ -1,1 +1,1 @@
-export type AssociationType = "VALUE_ADD_SERVICE";
+export type AssociationType = 'VALUE_ADD_SERVICE';

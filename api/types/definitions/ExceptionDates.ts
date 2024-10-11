@@ -1,4 +1,4 @@
-import type { OpenInterval } from "./OpenInterval.js";
+import type { OpenInterval } from './OpenInterval.js';
 
 export type ExceptionDates = {
   ExceptionDate?: string;

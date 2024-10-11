@@ -1,22 +1,22 @@
-import { GetOrderResponse } from "../../../../types/definitions/GetOrderResponse.js";
-import type { HTTP_GET } from "../../../../types/paths/orders/v0/orders/{orderId}.types.js";
+import { GetOrderResponse } from '../../../../types/definitions/GetOrderResponse.js';
+import type { HTTP_GET } from '../../../../types/paths/orders/v0/orders/{orderId}.types.js';
 
 export const GET: HTTP_GET = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "getOrder",
+      name: 'getOrder',
       rateLimit: {
         requestsPerSecond: 0.5,
         burst: 5,
       },
       validation: {
-        path: { orderId: "orderId" },
+        path: { orderId: 'orderId' },
       },
     },
     (req: typeof _req) => {
       const responseFactory = new req.context.ResponseFactory<GetOrderResponse>(
-        req,
+        req
       );
 
       const order = req.context.db.orders.findOne({
@@ -31,13 +31,13 @@ export const GET: HTTP_GET = (_req) =>
 
       const restrictedOrder = {
         ...order,
-        ShippingAddress: dataElements.includes("shippingAddress")
+        ShippingAddress: dataElements.includes('shippingAddress')
           ? order.ShippingAddress
           : undefined,
-        BuyerInfo: dataElements.includes("buyerInfo")
+        BuyerInfo: dataElements.includes('buyerInfo')
           ? order.BuyerInfo
           : undefined,
-        BuyerTaxInformation: dataElements.includes("buyerTaxInformation")
+        BuyerTaxInformation: dataElements.includes('buyerTaxInformation')
           ? order.BuyerTaxInformation
           : undefined,
       };
@@ -45,5 +45,5 @@ export const GET: HTTP_GET = (_req) =>
       return responseFactory.make(200, {
         payload: restrictedOrder,
       });
-    },
+    }
   );

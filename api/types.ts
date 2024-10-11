@@ -12,7 +12,7 @@ interface Example {
   value: unknown;
 }
 
-const counterfactResponse = Symbol("Counterfact Response");
+const counterfactResponse = Symbol('Counterfact Response');
 
 const counterfactResponseObject = {
   [counterfactResponse]: counterfactResponse,
@@ -55,19 +55,19 @@ type IfHasKey<SomeObject, Keys extends (keyof any)[], Yes, No> = Keys extends [
   : No;
 
 type SchemasOf<T extends { [key: string]: { schema: any } }> = {
-  [K in keyof T]: T[K]["schema"];
+  [K in keyof T]: T[K]['schema'];
 }[keyof T];
 
 type MaybeShortcut<
   ContentTypes extends MediaType[],
   Response extends OpenApiResponse,
 > = IfHasKey<
-  Response["content"],
+  Response['content'],
   ContentTypes,
-  (body: SchemasOf<Response["content"]>) => GenericResponseBuilder<{
-    content: NeverIfEmpty<OmitAll<Response["content"], ContentTypes>>;
-    headers: Response["headers"];
-    requiredHeaders: Response["requiredHeaders"];
+  (body: SchemasOf<Response['content']>) => GenericResponseBuilder<{
+    content: NeverIfEmpty<OmitAll<Response['content'], ContentTypes>>;
+    headers: Response['headers'];
+    requiredHeaders: Response['requiredHeaders'];
   }>,
   never
 >;
@@ -75,29 +75,29 @@ type MaybeShortcut<
 type NeverIfEmpty<Record> = {} extends Record ? never : Record;
 
 type MatchFunction<Response extends OpenApiResponse> = <
-  ContentType extends MediaType & keyof Response["content"],
+  ContentType extends MediaType & keyof Response['content'],
 >(
   contentType: ContentType,
-  body: Response["content"][ContentType]["schema"],
+  body: Response['content'][ContentType]['schema']
 ) => GenericResponseBuilder<{
-  content: NeverIfEmpty<Omit<Response["content"], ContentType>>;
-  headers: Response["headers"];
-  requiredHeaders: Response["requiredHeaders"];
+  content: NeverIfEmpty<Omit<Response['content'], ContentType>>;
+  headers: Response['headers'];
+  requiredHeaders: Response['requiredHeaders'];
 }>;
 
 type HeaderFunction<Response extends OpenApiResponse> = <
-  Header extends string & keyof Response["headers"],
+  Header extends string & keyof Response['headers'],
 >(
   header: Header,
-  value: Response["headers"][Header]["schema"],
+  value: Response['headers'][Header]['schema']
 ) => GenericResponseBuilder<{
-  content: NeverIfEmpty<Response["content"]>;
-  headers: NeverIfEmpty<Omit<Response["headers"], Header>>;
-  requiredHeaders: Exclude<Response["requiredHeaders"], Header>;
+  content: NeverIfEmpty<Response['content']>;
+  headers: NeverIfEmpty<Omit<Response['headers'], Header>>;
+  requiredHeaders: Exclude<Response['requiredHeaders'], Header>;
 }>;
 
 type RandomFunction<Response extends OpenApiResponse> = <
-  Header extends string & keyof Response["headers"],
+  Header extends string & keyof Response['headers'],
 >() => COUNTERFACT_RESPONSE;
 
 interface ResponseBuilder {
@@ -118,35 +118,35 @@ interface ResponseBuilder {
 type GenericResponseBuilderInner<
   Response extends OpenApiResponse = OpenApiResponse,
 > = OmitValueWhenNever<{
-  header: [keyof Response["headers"]] extends [never]
+  header: [keyof Response['headers']] extends [never]
     ? never
     : HeaderFunction<Response>;
-  html: MaybeShortcut<["text/html"], Response>;
+  html: MaybeShortcut<['text/html'], Response>;
   json: MaybeShortcut<
     [
-      "application/json",
-      "text/json",
-      "text/x-json",
-      "application/xml",
-      "text/xml",
+      'application/json',
+      'text/json',
+      'text/x-json',
+      'application/xml',
+      'text/xml',
     ],
     Response
   >;
-  match: [keyof Response["content"]] extends [never]
+  match: [keyof Response['content']] extends [never]
     ? never
     : MatchFunction<Response>;
-  random: [keyof Response["content"]] extends [never]
+  random: [keyof Response['content']] extends [never]
     ? never
     : RandomFunction<Response>;
-  text: MaybeShortcut<["text/plain"], Response>;
-  xml: MaybeShortcut<["application/xml", "text/xml"], Response>;
+  text: MaybeShortcut<['text/plain'], Response>;
+  xml: MaybeShortcut<['application/xml', 'text/xml'], Response>;
 }>;
 
 type GenericResponseBuilder<
   Response extends OpenApiResponse = OpenApiResponse,
 > = object extends OmitValueWhenNever<Response>
   ? COUNTERFACT_RESPONSE
-  : keyof OmitValueWhenNever<Response> extends "headers"
+  : keyof OmitValueWhenNever<Response> extends 'headers'
   ? {
       ALL_REMAINING_HEADERS_ARE_OPTIONAL: COUNTERFACT_RESPONSE;
       header: HeaderFunction<Response>;
@@ -159,7 +159,7 @@ type ResponseBuilderFactory<
   [StatusCode in keyof Responses]: GenericResponseBuilder<
     Responses[StatusCode]
   >;
-} & { [key: string]: GenericResponseBuilder<Responses["default"]> };
+} & { [key: string]: GenericResponseBuilder<Responses['default']> };
 
 type HttpStatusCode =
   | 100
@@ -220,7 +220,7 @@ type HttpStatusCode =
   | 511;
 
 interface OpenApiParameters {
-  in: "body" | "cookie" | "formData" | "header" | "path" | "query";
+  in: 'body' | 'cookie' | 'formData' | 'header' | 'path' | 'query';
   name: string;
   schema?: {
     type: string;

@@ -1,5 +1,5 @@
-import type { PackageReferenceId } from "./PackageReferenceId.js";
-import type { ConfirmShipmentOrderItemsList } from "./ConfirmShipmentOrderItemsList.js";
+import type { PackageReferenceId } from './PackageReferenceId.js';
+import type { ConfirmShipmentOrderItemsList } from './ConfirmShipmentOrderItemsList.js';
 
 export type PackageDetail = {
   packageReferenceId: PackageReferenceId;

@@ -1,1 +1,1 @@
-export type ShipmentStatus = "ReadyForPickup" | "PickedUp" | "RefusedPickup";
+export type ShipmentStatus = 'ReadyForPickup' | 'PickedUp' | 'RefusedPickup';

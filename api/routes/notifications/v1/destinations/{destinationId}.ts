@@ -1,19 +1,19 @@
-import { DeleteDestinationResponse } from "../../../../types/definitions/DeleteDestinationResponse.js";
-import { GetDestinationResponse } from "../../../../types/definitions/GetDestinationResponse.js";
-import type { HTTP_GET } from "../../../../types/paths/notifications/v1/destinations/{destinationId}.types.js";
-import type { HTTP_DELETE } from "../../../../types/paths/notifications/v1/destinations/{destinationId}.types.js";
+import { DeleteDestinationResponse } from '../../../../types/definitions/DeleteDestinationResponse.js';
+import { GetDestinationResponse } from '../../../../types/definitions/GetDestinationResponse.js';
+import type { HTTP_GET } from '../../../../types/paths/notifications/v1/destinations/{destinationId}.types.js';
+import type { HTTP_DELETE } from '../../../../types/paths/notifications/v1/destinations/{destinationId}.types.js';
 
 export const GET: HTTP_GET = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "getDestination",
+      name: 'getDestination',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 5,
       },
       validation: {
-        path: { destinationId: "uuid" },
+        path: { destinationId: 'uuid' },
       },
       grantless: true,
     },
@@ -29,20 +29,20 @@ export const GET: HTTP_GET = (_req) =>
       }
 
       return responseFactory.make(200, { payload: destination });
-    },
+    }
   );
 
 export const DELETE: HTTP_DELETE = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "deleteDestination",
+      name: 'deleteDestination',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 5,
       },
       validation: {
-        path: { destinationId: "uuid" },
+        path: { destinationId: 'uuid' },
       },
       grantless: true,
     },
@@ -58,5 +58,5 @@ export const DELETE: HTTP_DELETE = (_req) =>
       } else {
         return responseFactory.make(404);
       }
-    },
+    }
   );

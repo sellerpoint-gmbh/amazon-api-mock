@@ -1,5 +1,5 @@
-import type { BuyerCustomizedInfoDetail } from "./BuyerCustomizedInfoDetail.js";
-import type { Money } from "./Money.js";
+import type { BuyerCustomizedInfoDetail } from './BuyerCustomizedInfoDetail.js';
+import type { Money } from './Money.js';
 
 export type ItemBuyerInfo = {
   BuyerCustomizedInfo?: BuyerCustomizedInfoDetail;

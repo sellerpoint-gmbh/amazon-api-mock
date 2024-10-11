@@ -1,14 +1,14 @@
-import { CreateDestinationResponse } from "../../../types/definitions/CreateDestinationResponse.js";
-import { Destination } from "../../../types/definitions/Destination.js";
-import { GetDestinationsResponse } from "../../../types/definitions/GetDestinationsResponse.js";
-import type { HTTP_GET } from "../../../types/paths/notifications/v1/destinations.types.js";
-import type { HTTP_POST } from "../../../types/paths/notifications/v1/destinations.types.js";
+import { CreateDestinationResponse } from '../../../types/definitions/CreateDestinationResponse.js';
+import { Destination } from '../../../types/definitions/Destination.js';
+import { GetDestinationsResponse } from '../../../types/definitions/GetDestinationsResponse.js';
+import type { HTTP_GET } from '../../../types/paths/notifications/v1/destinations.types.js';
+import type { HTTP_POST } from '../../../types/paths/notifications/v1/destinations.types.js';
 
 export const GET: HTTP_GET = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "getDestinations",
+      name: 'getDestinations',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 5,
@@ -21,14 +21,14 @@ export const GET: HTTP_GET = (_req) =>
       const destinations = req.context.db.destinations.findAll();
 
       return responseFactory.make(200, { payload: destinations });
-    },
+    }
   );
 
 export const POST: HTTP_POST = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "createDestination",
+      name: 'createDestination',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 5,
@@ -55,5 +55,5 @@ export const POST: HTTP_POST = (_req) =>
       } as Destination);
 
       return responseFactory.make(200, { payload: destination });
-    },
+    }
   );

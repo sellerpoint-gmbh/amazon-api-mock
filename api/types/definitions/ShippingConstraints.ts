@@ -1,4 +1,4 @@
-import type { ConstraintType } from "./ConstraintType.js";
+import type { ConstraintType } from './ConstraintType.js';
 
 export type ShippingConstraints = {
   PalletDelivery?: ConstraintType;

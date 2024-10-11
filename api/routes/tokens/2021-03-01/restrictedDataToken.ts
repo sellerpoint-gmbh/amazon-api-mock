@@ -1,11 +1,11 @@
-import { CreateRestrictedDataTokenResponse } from "../../../types/definitions/CreateRestrictedDataTokenResponse.js";
-import type { HTTP_POST } from "../../../types/paths/tokens/2021-03-01/restrictedDataToken.types.js";
+import { CreateRestrictedDataTokenResponse } from '../../../types/definitions/CreateRestrictedDataTokenResponse.js';
+import type { HTTP_POST } from '../../../types/paths/tokens/2021-03-01/restrictedDataToken.types.js';
 
 export const POST: HTTP_POST = (_req) =>
   _req.context.RequestHandler.handle(
     _req,
     {
-      name: "createRestrictedDataToken",
+      name: 'createRestrictedDataToken',
       rateLimit: {
         requestsPerSecond: 1,
         burst: 10,
@@ -19,9 +19,9 @@ export const POST: HTTP_POST = (_req) =>
       const responseFactory =
         new req.context.ResponseFactory<CreateRestrictedDataTokenResponse>(req);
       const response = _req.context.RestrictedDataTokenHandler.generate(
-        req.body,
+        req.body
       );
 
       return responseFactory.make(200, response);
-    },
+    }
   );

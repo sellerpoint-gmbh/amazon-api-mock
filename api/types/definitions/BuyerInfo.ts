@@ -1,4 +1,4 @@
-import type { BuyerTaxInfo } from "./BuyerTaxInfo.js";
+import type { BuyerTaxInfo } from './BuyerTaxInfo.js';
 
 export type BuyerInfo = {
   BuyerEmail?: string;

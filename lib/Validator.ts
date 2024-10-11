@@ -1,11 +1,11 @@
-import * as z from "zod";
-import { CounterfactRequest } from "./types/counterfact";
+import * as z from 'zod';
+import { CounterfactRequest } from './types/counterfact';
 
 export interface ValidatorArgs {
   jsonBody?: z.AnyZodObject;
   path?: Record<
     string,
-    "notificationType" | "orderId" | "uuid" | z.AnyZodObject
+    'notificationType' | 'orderId' | 'uuid' | z.AnyZodObject
   >;
   query?: z.AnyZodObject;
 }
@@ -29,40 +29,40 @@ export class Validator {
   private makePathValidator(
     args: Record<
       string,
-      "notificationType" | "orderId" | "uuid" | z.AnyZodObject
-    >,
+      'notificationType' | 'orderId' | 'uuid' | z.AnyZodObject
+    >
   ) {
     let validatorObj = {};
     for (const key in args) {
       switch (args[key]) {
-        case "orderId":
+        case 'orderId':
           validatorObj[key] = z.string().regex(/\d{3}-\d{7}-\d{7}/);
           break;
-        case "uuid":
+        case 'uuid':
           validatorObj[key] = z.string().uuid();
           break;
-        case "notificationType":
+        case 'notificationType':
           validatorObj[key] = z.enum([
-            "ACCOUNT_STATUS_CHANGED",
-            "ANY_OFFER_CHANGED",
-            "B2B_ANY_OFFER_CHANGED",
-            "BRANDED_ITEM_CONTENT_CHANGE",
-            "DETAIL_PAGE_TRAFFIC_EVENT",
-            "FBA_INVENTORY_AVAILABILITY_CHANGES",
-            "FBA_OUTBOUND_SHIPMENT_STATUS",
-            "FEE_PROMOTION",
-            "FEED_PROCESSING_FINISHED",
-            "FULFILLMENT_ORDER_STATUS",
-            "ITEM_INVENTORY_EVENT_CHANGE",
-            "ITEM_SALES_EVENT_CHANGE",
-            "ITEM_PRODUCT_TYPE_CHANGE",
-            "LISTINGS_ITEM_STATUS_CHANGE",
-            "LISTINGS_ITEM_ISSUES_CHANGE",
-            "LISTINGS_ITEM_MFN_QUANTITY_CHANGE",
-            "ORDER_CHANGE",
-            "PRICING_HEALTH",
-            "PRODUCT_TYPE_DEFINITIONS_CHANGE",
-            "REPORT_PROCESSING_FINISHED",
+            'ACCOUNT_STATUS_CHANGED',
+            'ANY_OFFER_CHANGED',
+            'B2B_ANY_OFFER_CHANGED',
+            'BRANDED_ITEM_CONTENT_CHANGE',
+            'DETAIL_PAGE_TRAFFIC_EVENT',
+            'FBA_INVENTORY_AVAILABILITY_CHANGES',
+            'FBA_OUTBOUND_SHIPMENT_STATUS',
+            'FEE_PROMOTION',
+            'FEED_PROCESSING_FINISHED',
+            'FULFILLMENT_ORDER_STATUS',
+            'ITEM_INVENTORY_EVENT_CHANGE',
+            'ITEM_SALES_EVENT_CHANGE',
+            'ITEM_PRODUCT_TYPE_CHANGE',
+            'LISTINGS_ITEM_STATUS_CHANGE',
+            'LISTINGS_ITEM_ISSUES_CHANGE',
+            'LISTINGS_ITEM_MFN_QUANTITY_CHANGE',
+            'ORDER_CHANGE',
+            'PRICING_HEALTH',
+            'PRODUCT_TYPE_DEFINITIONS_CHANGE',
+            'REPORT_PROCESSING_FINISHED',
           ]);
           break;
         default:
@@ -81,9 +81,9 @@ export class Validator {
       if (!validationResponse.success) {
         validationErrors.push(
           ...validationResponse.error.issues.map((e) => ({
-            code: "custom-1",
+            code: 'custom-1',
             message: JSON.stringify(e),
-          })),
+          }))
         );
       }
     }

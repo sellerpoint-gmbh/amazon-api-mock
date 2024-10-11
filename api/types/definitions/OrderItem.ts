@@ -1,15 +1,15 @@
-import type { AssociatedItem } from "./AssociatedItem.js";
-import type { ProductInfoDetail } from "./ProductInfoDetail.js";
-import type { PointsGrantedDetail } from "./PointsGrantedDetail.js";
-import type { Money } from "./Money.js";
-import type { PromotionIdList } from "./PromotionIdList.js";
-import type { TaxCollection } from "./TaxCollection.js";
-import type { ItemBuyerInfo } from "./ItemBuyerInfo.js";
-import type { BuyerRequestedCancel } from "./BuyerRequestedCancel.js";
-import type { SubstitutionPreferences } from "./SubstitutionPreferences.js";
-import type { Measurement } from "./Measurement.js";
-import type { ShippingConstraints } from "./ShippingConstraints.js";
-import type { AmazonPrograms } from "./AmazonPrograms.js";
+import type { AssociatedItem } from './AssociatedItem.js';
+import type { ProductInfoDetail } from './ProductInfoDetail.js';
+import type { PointsGrantedDetail } from './PointsGrantedDetail.js';
+import type { Money } from './Money.js';
+import type { PromotionIdList } from './PromotionIdList.js';
+import type { TaxCollection } from './TaxCollection.js';
+import type { ItemBuyerInfo } from './ItemBuyerInfo.js';
+import type { BuyerRequestedCancel } from './BuyerRequestedCancel.js';
+import type { SubstitutionPreferences } from './SubstitutionPreferences.js';
+import type { Measurement } from './Measurement.js';
+import type { ShippingConstraints } from './ShippingConstraints.js';
+import type { AmazonPrograms } from './AmazonPrograms.js';
 
 export type OrderItem = {
   ASIN: string;
@@ -44,7 +44,7 @@ export type OrderItem = {
   IsTransparency?: boolean;
   IossNumber?: string;
   StoreChainStoreId?: string;
-  DeemedResellerCategory?: "IOSS" | "UOSS";
+  DeemedResellerCategory?: 'IOSS' | 'UOSS';
   BuyerInfo?: ItemBuyerInfo;
   BuyerRequestedCancel?: BuyerRequestedCancel;
   SerialNumbers?: Array<string>;

@@ -1,4 +1,4 @@
-import type { DestinationResource } from "./DestinationResource.js";
+import type { DestinationResource } from './DestinationResource.js';
 
 export type Destination = {
   name: string;

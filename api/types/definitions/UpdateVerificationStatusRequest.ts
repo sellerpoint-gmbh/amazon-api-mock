@@ -1,4 +1,4 @@
-import type { UpdateVerificationStatusRequestBody } from "./UpdateVerificationStatusRequestBody.js";
+import type { UpdateVerificationStatusRequestBody } from './UpdateVerificationStatusRequestBody.js';
 
 export type UpdateVerificationStatusRequest = {
   regulatedOrderVerificationStatus: UpdateVerificationStatusRequestBody;

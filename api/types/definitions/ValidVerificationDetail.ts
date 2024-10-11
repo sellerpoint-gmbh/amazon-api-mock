@@ -1,4 +1,4 @@
-import type { VerificationStatus } from "./VerificationStatus.js";
+import type { VerificationStatus } from './VerificationStatus.js';
 
 export type ValidVerificationDetail = {
   VerificationDetailType: string;
