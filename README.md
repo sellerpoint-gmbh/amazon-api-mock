@@ -28,6 +28,9 @@ You can update the internal store by sending a `POST` request to `/admin/store/{
 Supported collections:
 
 - `orders`
+- `orderRegulatedInfos`
+- `orderItemsLists`
+- `orderItemBuyerInfos`
 - `destinations`
 - `subscriptions`
 
