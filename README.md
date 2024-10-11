@@ -17,7 +17,7 @@ To mock an API call replace the `https://sellingpartnerapi-na.amazon.com` with `
 ### Mocked behavior
 
 - Rate limiting
-- Validation
+- Input validation
 - Dynamic data
 - Restricted data using [RDT](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference#post-tokens2021-03-01restricteddatatoken)
 
