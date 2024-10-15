@@ -73,7 +73,11 @@ export class Validator {
     return z.object(validatorObj).strict();
   }
 
-  private validate(validator: z.AnyZodObject, obj: any): any[] {
+  private validate(
+    validator: z.AnyZodObject,
+    obj: any,
+    errorCode: string
+  ): any[] {
     let validationErrors = [];
 
     if (validator) {
@@ -81,7 +85,7 @@ export class Validator {
       if (!validationResponse.success) {
         validationErrors.push(
           ...validationResponse.error.issues.map((e) => ({
-            code: 'custom-1',
+            code: errorCode,
             message: JSON.stringify(e),
           }))
         );
@@ -93,9 +97,9 @@ export class Validator {
 
   public process(request: CounterfactRequest) {
     const validationErrors = [
-      ...this.validate(this.jsonBodyValidator, request.body),
-      ...this.validate(this.pathValidator, request.path),
-      ...this.validate(this.queryValidator, request.query),
+      ...this.validate(this.jsonBodyValidator, request.body, 'custom-body'),
+      ...this.validate(this.pathValidator, request.path, 'custom-path'),
+      ...this.validate(this.queryValidator, request.query, 'custom-query'),
     ];
 
     if (validationErrors.length) {
