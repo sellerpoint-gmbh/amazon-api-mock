@@ -1,7 +1,7 @@
 export class Collection<T> {
   constructor(private data: T[]) {}
 
-  public findOne(query: Partial<T>): T {
+  public findOne(query: Partial<T> = {}): T {
     return this.data.find((item) => {
       return Object.keys(query).every((key) => item[key] === query[key]);
     });

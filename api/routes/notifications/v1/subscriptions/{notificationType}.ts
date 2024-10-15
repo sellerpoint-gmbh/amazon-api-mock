@@ -23,6 +23,10 @@ export const GET: HTTP_GET = (_req) =>
       const responseFactory = new req.context.ResponseFactory(req);
       const subscription = req.context.db.subscriptions.findOne();
 
+      if (!subscription) {
+        return responseFactory.make(404);
+      }
+
       return responseFactory.make(200, { payload: subscription });
     }
   );
