@@ -184,5 +184,16 @@
     }
   ],
   "destinations": [],
-  "subscriptions": []
+  "subscriptions": [
+    {
+      "subscriptionId": "42f04652-4b68-4706-874b-0cf5e3768839",
+      "payloadVersion": "1.0",
+      "destinationId": "0ef285c1-50b0-4f65-9ba3-ffcb1993a99f"
+    },
+    {
+      "subscriptionId": "f8424977-063f-4674-b065-0bd59e587e5c",
+      "payloadVersion": "1.0",
+      "destinationId": "0ef285c1-50b0-4f65-9ba3-ffcb1993a99f"
+    }
+  ]
 }

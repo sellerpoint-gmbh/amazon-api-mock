@@ -50,7 +50,7 @@ export const DELETE: HTTP_DELETE = (_req) =>
     },
     (req: typeof _req) => {
       const responseFactory = new req.context.ResponseFactory(req);
-      const ok = req.context.db.destinations.delete({
+      const ok = req.context.db.subscriptions.delete({
         subscriptionId: req.path.subscriptionId,
       });
 
